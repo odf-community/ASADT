@@ -10,14 +10,13 @@ function disphelp {
     echo ""
     echo "More information is avialable on the ASADT Wiki!"
     echo "https://github.com/odf-community/ASADT/wiki/"
-    echo "OR"
-    echo "For full local helpdoc, execute "'"-hh"'" instead of "'"-h"'""
+    echo "For full local ManPage/HelpDoc, execute "'"-hh"'" instead of "'"-h"'""
 
 }
 
 function disphelp_full {
 
-    cat "$approot/mainprog/doc/helpdoc.txt"
+    cat "$progroot/doc/helpdoc.txt"
 
     exit
 

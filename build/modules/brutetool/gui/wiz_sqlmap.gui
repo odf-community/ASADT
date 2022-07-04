@@ -17,7 +17,7 @@ function wizgui_sqlmap {
 
         echo "wiz_sqlmap.gui> operation cancelled :("
 
-        exit 1
+        exit
 
     fi
 
@@ -30,21 +30,21 @@ function wizgui_sqlmap {
     if [ -z "$targeturl" ]; then
 
         echo "Missing Input... Please Provide Target URL or Form Link"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$output_main" ]; then
 
         echo "Missing Input... Please Provide Dump Output Directory"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$sqlmap_datastring" ]; then
 
         echo "Missing Input... Please Provide Data String"
-        exit 3
+        exit
 
     fi
 

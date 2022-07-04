@@ -14,7 +14,7 @@ function wizgui_nikto {
 
         echo "wiz_nikto.gui> scan cancelled :("
 
-        exit 1
+        exit
 
     fi
 
@@ -24,14 +24,14 @@ function wizgui_nikto {
     if [ -z "$targetip" ]; then
 
         echo "Missing Input... Please Provide Target IP"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$output_main" ]; then
 
         echo "Missing Input... Please Provide Output Directory"
-        exit 3
+        exit
 
     fi
 

@@ -14,7 +14,7 @@ function wizgui_dnsmap {
 
         echo "wiz_dnsmap.gui> scan cancelled :("
 
-        exit 1
+        exit
 
     fi
 
@@ -24,14 +24,14 @@ function wizgui_dnsmap {
     if [ -z "$targethostname" ]; then
 
         echo "Missing Input... Please Provide Target Hostname"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$output_main" ]; then
 
         echo "Missing Input... Please Provide Output Directory"
-        exit 3
+        exit
 
     fi
 

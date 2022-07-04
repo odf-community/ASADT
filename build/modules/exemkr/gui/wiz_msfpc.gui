@@ -20,7 +20,7 @@ function wizgui_msfpc_custom {
 
         echo "wiz_msfpc.gui> operation cancelled :("
 
-        exit 1
+        exit
 
     fi
 
@@ -40,49 +40,49 @@ function wizgui_msfpc_custom {
     if [ -z "$pnetinterfaceid" ]; then
 
         echo "Missing Input... Please Provide HOST Network Interface/IP"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$ptype" ]; then
 
         echo "Missing Input... Please Provide Payload Type"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$pcmd" ]; then
 
         echo "Missing Input... Please Provide Payload Shell Interface Type"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$pconnecttype" ]; then
 
         echo "Missing Input... Please Provide Payload Connection Type"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$pstagetype" ]; then
 
         echo "Missing Input... Please Provide Payload Staging Type"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$plinktype" ]; then
 
         echo "Missing Input... Please Provide Payload Link Type"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$output_main" ]; then
 
         echo "Missing Input... Please Provide Output Directory"
-        exit 3
+        exit
 
     fi
 

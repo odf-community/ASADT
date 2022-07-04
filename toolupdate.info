@@ -1,13 +1,6 @@
-newversion='v1.0.7-2'
+newversion='v1.0.8'
 
-# Implemented new modular based 'source' configuration sheets for better module implementation.
-# Added legal disclaimer.
-# Added new THC-SSL-DOS tool to the brutetool toolkit.
-# Separated configuration file based on tool name which should allow for easier configuration editing.
-# Changed multiple file names for easier module integration.
-# Added 'which' tag in builder script to detect THC-SSL-DOS user files.
-# Misc. grammatical fixes, along with changes to exit codes.
-
-# Upcoming Changes:
-# Adding a new command to allow for editing specific config files using a menu and "nano" package.
-# Adding system to save changed config files after official configuration system has been set in place
+## Added the "CnfEdit" argument to shell script. Used for easily editing config files for the program.
+## Fixed all exit codes to reflect 'exit nul'.
+## Added banner for cnfedit tool... for literally no reason
+## Added info comments for almost all config pages. For info on global variables, please refer to our Help Document

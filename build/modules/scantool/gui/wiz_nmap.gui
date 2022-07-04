@@ -16,7 +16,7 @@ function wizgui_nmap {
 
         echo "wiz_namp.gui> scan cancelled :("
 
-        exit 1
+        exit
 
     fi
 
@@ -28,7 +28,7 @@ function wizgui_nmap {
     if [ -z "$targetip" ]; then
 
         echo "Missing Input... Please Provide Target IP"
-        exit 3
+        exit
 
     fi
 
@@ -47,7 +47,7 @@ function wizgui_nmap {
     if [ -z "$output_main" ]; then
 
         echo "Missing Input... Please Provide Output Directory"
-        exit 3
+        exit
 
     fi
 

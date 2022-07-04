@@ -1,9 +1,10 @@
-function showzpromt {
+function showupdatepromt {
 
 zenity --info \
---text="This update will retrive files from github using git-CLI for linux systems. If this tool is not installed, the update will not complete."
+--width="500" \
+--text="This update will retrive files from github using Git-CLI for linux systems. If this tool is not installed, the update will not complete."
 
-sleep 1
+sleep 5
 
 }
 

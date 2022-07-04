@@ -1,4 +1,4 @@
-ASADT MARK II VERSION 1.0.7-2 HELP DOCUMENT
+ASADT MARK II VERSION 1.0.8 HELP DOCUMENT
 
 Execute: ./asadt.sh [-v] [-h] [-hh] [--updatecheck] [--scantool] [--brutetool] [--exemkr]
 
@@ -7,6 +7,10 @@ Execute: ./asadt.sh [-v] [-h] [-hh] [--updatecheck] [--scantool] [--brutetool] [
  [-h]: Shows the short help document
 
  [-hh]: Displays the entire help document on terminal using "cat" command
+
+ [-cnfedit]: Starts the CnfEdit Tool, a small program that utilizes the 
+             Nano Text Editor package (nano) to edit and save respected
+             config files using an 'if' only file search system.
 
  [--updatecheck]: Checks the program version diffs against newer versions
                   using "wget" command. If an update is found, you will be notified on screen.
@@ -37,8 +41,8 @@ Execute: ./asadt.sh [-v] [-h] [-hh] [--updatecheck] [--scantool] [--brutetool] [
                https://nmap.org/book/nse-usage.html
 
  [--brutetool]: Requires tool option post to setting this argument.
-                Includes "sqlmap" & "thcssldos". 
-                Please note, This tool ins still in beta testing
+                Includes "sqlmap" & "thcssldos".
+                Please note, This tool is still in beta testing
                 and has NOT been fully implemented.
 
  [--exemkr]: Added in MII-v1.0.3, this tool combines ASADT with the already existent
@@ -50,22 +54,29 @@ Execute: ./asadt.sh [-v] [-h] [-hh] [--updatecheck] [--scantool] [--brutetool] [
 
  EDITING THE CONFIGURATION
 
- #########################################################################
- #                                                                       #
- # Script Enablers | Enables or Disables Specific Modules                #
- #                                                                       #
- # Script Variables | Variables, Such as Filenames or Script Settings    #
- #                                                                       #
- #########################################################################
+ #############################################################################################
+ #                                                                                           #
+ # Script Enablers | Enables or Disables Specific Modules                                    #
+ #                                                                                           #
+ # Script Variables | Variables, Such as Filenames or Script Settings                        #
+ #                                                                                           #
+ # Switches [Boolean] | 1=true 0=false - Used to Enable or Disable Specific Script Functions #
+ #                                                                                           #
+ #############################################################################################
 
  The configuration can be edited only by those possessing root privileges.
- Some text editors may not be able to edit the config and save it as the
- root user, we recommend using "sudo nano" to edit and save the configuration.
+ We have made it easier to edit the config with only 1 command using the ASADT
+ shell. Use the "-cnfedit" argument to open the CnfEdit tool.
 
- There are 3 interprog configuration pages as of version 1.0.7-2, these are
- "exemkr.config", "scantool.config" & "brutetool.config", DO NOT EDIT THESE!
- Each tool as of v. 1.0.7-2 of the MK_II Platform now have their own configuration
- pages, seperated by toolkit names as housing directories.
+ To provide minimal reverts to your edited config files during an update, 
+ we will attempt to provide as few changes to already existant configuration
+ files unless deemed completely necessary to provide updates to specific tools
+ and their configurations. Put in short, your config isn't backed up when you
+ update the shell to a newer version, if you want to keep your changes, make a backup
+ and keep an eye out for new variable changes, and other updates. If you choose otherwise, 
+ your config files will be reverted to the basic defaults we set for basic production use.
+ 
+ You WILL be notified if functional changes are made to specific configuration files!
 
  If you need assistance finding the location in which you installed ASADT,
  please refer to the user registry key file located at "/root/.asadt", referred

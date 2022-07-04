@@ -6,8 +6,8 @@
 
 
 builder_version="3.1.0"
-buildv="v1.0.7-2"
-buildv_long="MARK II BETA | v 1.0.7-2"
+buildv="v1.0.8"
+buildv_long="MARK II BETA | v 1.0.8"
 
 function checkroot {
 
@@ -152,6 +152,7 @@ function checkapt {
     which git
     which cat
     which sudo
+    wchich nano
     which nmap
     which nikto
     which dnsmap

@@ -57,7 +57,7 @@ function chkupdate {
 
                 source "$progroot/ui/updater.ui"
 
-                showzpromt
+                showupdatepromt
                 update_asadt_mainprogdat_safetygit
 
             else

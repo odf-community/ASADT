@@ -14,7 +14,7 @@ function wizgui_assetfinder {
 
         echo "wiz_assetfinder.gui> scan cancelled :("
 
-        exit 1
+        exit
 
     fi
 
@@ -24,14 +24,14 @@ function wizgui_assetfinder {
     if [ -z "$targethostname" ]; then
 
         echo "Missing Input... Please Provide Target Hostname OR IP Address"
-        exit 3
+        exit
 
     fi
 
     if [ -z "$output_main" ]; then
 
         echo "Missing Input... Please Provide Output Directory"
-        exit 3
+        exit
 
     fi
 

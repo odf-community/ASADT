@@ -1,0 +1,84 @@
+function configeditor {
+
+    cat $progroot/ui/cnfedit_banner.txt
+    echo ""
+    echo "[ LOAD ] $cnfroot"
+
+    tree $cnfroot
+
+    echo ""
+    echo "Ex. nmap.config"
+    echo -n "Please Enter Tool Config Filename: "
+
+    read config_fn
+
+    echo "Searching for $config_fn ..."
+
+    function configeditor_checkfn {
+
+        cd $cnfroot/brutetool
+
+        if [ -f "$config_fn" ]; then
+
+            echo "[ FOUND ] $cnfroot/brutetool/$config_fn"
+            fn_real="true"
+            realfileid="$cnfroot/brutetool/$config_fn"
+
+        fi
+
+        cd $cnfroot/exemkr
+
+        if [ -f "$config_fn" ]; then
+
+            echo "[ FOUND ] $cnfroot/exemkr/$config_fn"
+            fn_real="true"
+            realfileid="$cnfroot/exemkr/$config_fn"
+
+        fi
+
+        cd $cnfroot/scantool
+
+        if [ -f "$config_fn" ]; then
+
+            echo "[ FOUND ] $cnfroot/scantool/$config_fn"
+            fn_real="true"
+            realfileid="$cnfroot/scantool/$config_fn"
+
+        fi
+
+        if [ -z "$fn_real" ]; then
+
+            echo "Looks like $config_fn wasnt found in"
+            dir $cnfroot
+
+            echo "Please Try Again!"
+
+            exit
+
+        fi
+
+    }
+
+    function configeditor_nanosetup {
+
+        echo""
+        echo "[ NANO ] LAUNCHING NANO TEXT EDITOR"
+        echo "[ EDITOR ARGUMENTS ] "'"--nonewlines"'""
+        echo "[ EDITING ] $realfileid"
+        
+        echo""
+
+        nano --version
+
+        echo ""
+        
+        sleep 2
+
+        sudo nano --nonewlines $realfileid
+
+        exit
+
+        
+    }
+
+}

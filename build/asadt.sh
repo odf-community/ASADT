@@ -34,6 +34,7 @@ function getuserreg {
         source $userreg
 
         #MAIN PROGRAM DATA LIB
+        source $progroot/func/configeditor.func
         source $progroot/func/disphelp.func
         source $progroot/func/dispversion.func
         source $progroot/func/update.func
@@ -106,6 +107,16 @@ function passvar_cmd {
     if [ "$cmdvar1" = "-hh" ]; then
 
         disphelp_full
+
+        exit
+
+    fi
+
+    if [ "$cmdvar1" = "-cnfedit" ]; then
+
+        configeditor
+        configeditor_checkfn
+        configeditor_nanosetup
 
         exit
 

@@ -1,20 +1,13 @@
 # ASADT | Assistive Search And Discovery Tool
-Release: Mark_II-v1.0.7-2 <br>
-Last Update @ 6/24/2022 [ToolUpdate File](toolupdate.info)<br>
+Release: Mark_II-v1.0.8 <br>
+Last Update @ 7/3/2022 [ToolUpdate File](toolupdate.info)<br>
 
 
 # MAJOR UPDATES
-Implemented new modular based 'source' configuration sheets for better module implementation. <br>
-Added legal disclaimer. <br>
-Added new THC-SSL-DOS tool to the brutetool toolkit. <br>
-Separated configuration file based on tool name which should allow for easier configuration editing. <br>
-Changed multiple file names for easier module integration. <br>
-Added 'which' tag in builder script to detect THC-SSL-DOS user files. <br>
-Misc. grammatical fixes, along with changes to exit codes. <br>
-<br>
-Upcoming Changes: <br>
-Adding a new command to allow for editing specific config files using a menu and "nano" package. <br>
-Adding system to save changed config files after official configuration system has been set in place. <br>
+Added the "CnfEdit" argument to shell script. Used for easily editing config files for the program easier. <br>
+Fixed all exit codes to reflect 'exit nul'. <br>
+Added banner for cnfedit tool... for literally no reason <br>
+Added info comments for almost all config pages. For info on global variables, please refer to our [Help Document](build/mainprog/doc/helpdoc.txt) <br>
 
 
 <br>

@@ -1,10 +1,11 @@
-function configeditor {
+function configeditor () {
 
     cat $progroot/ui/cnfedit_banner.txt
     echo ""
-    echo "[ LOAD ] $cnfroot"
+    echo ""
+    $infomessage "[ LOAD ] $cnfroot"
 
-    tree $cnfroot
+    tree -L 2 -F -C -A "$cnfroot"
 
     echo ""
     echo "Ex. nmap.config"
@@ -12,35 +13,29 @@ function configeditor {
 
     read config_fn
 
-    echo "Searching for $config_fn ..."
+    $infomessage "[ INFO ] Searching for $config_fn ..."
 
-    function configeditor_checkfn {
+    configeditor_verifyfn () {
 
-        cd $cnfroot/brutetool
+        if [ -f "$cnfroot/brutetool/$config_fn" ]; then
 
-        if [ -f "$config_fn" ]; then
-
-            echo "[ FOUND ] $cnfroot/brutetool/$config_fn"
+            $infomessage "[ FOUND ] $cnfroot/brutetool/$config_fn"
             fn_real="true"
             realfileid="$cnfroot/brutetool/$config_fn"
 
         fi
 
-        cd $cnfroot/exemkr
+        if [ -f "$cnfroot/exemkr/$config_fn" ]; then
 
-        if [ -f "$config_fn" ]; then
-
-            echo "[ FOUND ] $cnfroot/exemkr/$config_fn"
+            $infomessage "[ FOUND ] $cnfroot/exemkr/$config_fn"
             fn_real="true"
             realfileid="$cnfroot/exemkr/$config_fn"
 
         fi
 
-        cd $cnfroot/scantool
+        if [ -f "$cnfroot/scantool/$config_fn" ]; then
 
-        if [ -f "$config_fn" ]; then
-
-            echo "[ FOUND ] $cnfroot/scantool/$config_fn"
+            $infomessage "[ FOUND ] $cnfroot/scantool/$config_fn"
             fn_real="true"
             realfileid="$cnfroot/scantool/$config_fn"
 
@@ -48,10 +43,13 @@ function configeditor {
 
         if [ -z "$fn_real" ]; then
 
-            echo "Looks like $config_fn wasnt found in"
-            dir $cnfroot
-
-            echo "Please Try Again!"
+            $errormessage "[ ERROR ] '$config_fn' wasn't found in $(echo "$cnfroot")"
+            $errormessage "[ ERROR ] Please Try Again!"
+            echo ""
+            $infomessage "[ INFO ] Notice!"
+            $infomessage "[ INFO ] The files "'"brutetool.config"'" "'"exemkr.config"'" & "'"scantool.config"'" are NOT"
+            $infomessage "[ INFO ] included in CnfEdit's file search area. The ONLY editable files using this command are"
+            $infomessage "[ INFO ] located within the underlying module config directories."
 
             exit
 
@@ -59,12 +57,12 @@ function configeditor {
 
     }
 
-    function configeditor_nanosetup {
+    configeditor_launchnano () {
 
         echo""
-        echo "[ NANO ] LAUNCHING NANO TEXT EDITOR"
-        echo "[ EDITOR ARGUMENTS ] "'"--nonewlines"'""
-        echo "[ EDITING ] $realfileid"
+        $infomessage "[ NANO ] LAUNCHING NANO TEXT EDITOR"
+        $infomessage "[ EDITOR ARGUMENTS ] "'"--nonewlines"'""
+        $infomessage "[ EDITING ] $realfileid"
         
         echo""
 
@@ -78,7 +76,6 @@ function configeditor {
 
         exit
 
-        
     }
 
 }

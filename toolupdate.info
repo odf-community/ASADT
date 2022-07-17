@@ -1,6 +1,20 @@
-newversion='v1.0.8'
+newversion='v1.0.9' # ㉿ Kali-Linux Exclusive (Parrot O.S. Compatable)
 
-## Added the "CnfEdit" argument to shell script. Used for easily editing config files for the program.
-## Fixed all exit codes to reflect 'exit nul'.
-## Added banner for cnfedit tool... for literally no reason
-## Added info comments for almost all config pages. For info on global variables, please refer to our Help Document
+## Updated Build Script to version 4.0.0, added considerable updates for less errors during update/build.
+## Changed 'tree' Options For CnfEdit tool, along with removing 'cd' destinations for less active directory movement.
+## Added "ANSI" Color Codes (colored terminal messages) For easier error, warning & info messages.
+## Thank You @fidian (https://github.com/fidian) for collaboration with the ANSI GitHub Project. <3
+## Re-imaged the main script to be function based. Renamed internal functions and wrapped the entire program within a bash function.
+## Fixed width issues with the legal disclaimer ui prompt.
+## Renamed a few files.
+## Added 'mainprog.config' for consolidating the main program extensions to one source sheet.
+## Fixed locations references.
+## Added new Project Pictures (.gif)
+## Major changes to "README.md"
+## Editited the wiki documentation
+## Removed 'updater.uifunc' (obsolete)
+## Ensured compatibility with "Parrot O.S." for outreach to other OSes
+
+## Upcoming Updates:
+## Adding the ability for the update script to check for altered configuration files,
+## in which altered config files (unless updates are necessary) will be kept during update.

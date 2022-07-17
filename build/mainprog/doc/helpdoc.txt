@@ -1,4 +1,4 @@
-ASADT MARK II VERSION 1.0.8 HELP DOCUMENT
+ASADT MARK II VERSION 1.0.9 HELP DOCUMENT ㉿
 
 Execute: ./asadt.sh [-v] [-h] [-hh] [--updatecheck] [--scantool] [--brutetool] [--exemkr]
 

@@ -1,16 +1,16 @@
 function disphelp {
 
     echo ""
-    echo "ASADT SHORT HELPDOC"
-    echo "--------------------------------------------"
+    $infomessage "ASADT SHORT HELPDOC"
+    $infomessage "For Full Local ManPage/HelpDoc, Execute "'"-hh"'" instead of "'"-h"'""
+    $infomessage "--------------------------------------------"
     echo ""
-    echo "Version: $appversion_long"
-    echo "USAGE:"
-    echo "Execute: $0 [-v] [-h] [-hh] [--updatecheck] [--scantool+arg] [--brutetool+arg] [--exemkr]"
+    $infomessage "Version: $appversion_long"
+    $infomessage "USAGE:"
+    $infomessage "Execute: $0 [-v] [-h] [-hh] [--updatecheck] [--scantool+arg] [--brutetool+arg] [--exemkr]"
     echo ""
-    echo "More information is avialable on the ASADT Wiki!"
-    echo "https://github.com/odf-community/ASADT/wiki/"
-    echo "For full local ManPage/HelpDoc, execute "'"-hh"'" instead of "'"-h"'""
+    $infomessage "More information is avialable on the ASADT Wiki!"
+    $infomessage "https://github.com/odf-community/ASADT/wiki/"
 
 }
 

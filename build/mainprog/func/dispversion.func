@@ -1,9 +1,9 @@
 function dispversion {
 
-banner="$approot/mainprog/ui/banner.txt"
+banner="$progroot/ui/asadt_banner.txt"
 
 cat $banner
 
-echo "                 $appversion_long"
+echo "$appversion_long"
 
 }

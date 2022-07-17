@@ -10,8 +10,8 @@ function chkupdate {
 
     if [ -z "$newversion" ]; then
 
-        echo "update.func> Error: Failed To Calculate Diffs"
-        echo "update.func> Info: Make Sure 'toolupdate.info' is downloaded and accessable in $updatefile"
+        $errormessage "[ ERROR ] Failed To Calculate Version Diffs"
+        $infomessage "[ INFO ] 'toolupdate.info' Could Not Be Downloaded At This Time..."
 
         exit
 
@@ -21,15 +21,17 @@ function chkupdate {
 
             sudo rm $updatefile
 
-            echo "INSTALLED VERSION: $appversion"
-            echo "CURRENT SOURCE VERSION: $newversion"
-            echo "ASADT IS UP TO DATE!"
+            $infomessage "[ INFO ] INSTALLED VERSION: $appversion"
+            $infomessage "[ INFO ] CURRENT SOURCE VERSION: $newversion"
+            $infomessage "[ INFO ] ASADT IS UP TO DATE!"
+
+            exit
 
         else
 
-            echo "VERSION DIFF DETECTED"
-            echo "$appversion --> $newversion"
-            echo "ASADT SEEMS TO BE OUT OF DATE..."
+            $warningmessage "[ WARNING ] VERSION DIFF DETECTED"
+            $warningmessage "[ WARNING ] $appversion --> $newversion"
+            $warningmessage "[ WARNING ] ASADT SEEMS TO BE OUT OF DATE..."
             echo ""
             echo ""
             echo "Update Information:"

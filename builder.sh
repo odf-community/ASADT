@@ -160,7 +160,7 @@ build_update () {
         echo "Looks Like ASADT Has Already Been Installed On This System!"
         echo "Would You Like To Update From $appversion -> $buildv Using This Script?"
         echo ""
-        echo -n "Update to $appversion? [Y/n] "
+        echo -n "Update to $buildv? [Y/n] "
 
         read updateaskyn
 

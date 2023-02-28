@@ -1,0 +1,39 @@
+dict_mod_exemkr () {
+
+    msfpc_tool () {
+
+        if [ "$msfpc_enable" = "true" ]; then
+
+            displayboxhandler modexec
+
+            echo "msfpc $pnetinterfaceid $ptype $pcmd $pport $pconnecttype $pstagetype $plinktype $msfpc_verbosity_enabler"
+            echo ""
+
+            msfpc "$ptype" "$pnetinterface" "$pcmd" "$pport" "$pconnecttype" "$pstagetype" "$plinktype" "$msfpc_verbosity_enabler"
+
+        else
+
+            displayboxhandler disablewarn
+
+        fi
+
+    }
+}
+
+dict_mod_exemkr
+
+modhandler_exemkr () {
+
+    toolname="$1"
+
+    if [ "$toolname" = "msfpc" ]; then
+
+        cfg_parser "$configbin/exemkr/msfpc.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+
+        msfpc_tool
+
+    fi
+    
+}

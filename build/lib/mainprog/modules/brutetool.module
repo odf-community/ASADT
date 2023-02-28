@@ -1,0 +1,243 @@
+dict_mod_brutetool () {
+
+    sqlmap_tool () {
+
+        sqlmap_checkskip () {
+
+            if [ "$sqlmap_enable" = "true" ]; then
+
+                if [ "$sqlmap_skip_to_sqlwiz" = "true" ]; then
+
+                    echo "ASADT FULL COMPATABILITY WIZARD DISABLED!!"
+                    echo ""'"$sqlmap_skip_to_sqlwiz = 1"'""
+                    echo ""
+                    echo "USING SQLMAP DEFAULT WIZARD!"
+                    echo "sqlmap --wizard"
+
+                    sqlmap --wizard
+
+                    exit
+
+                fi
+
+            else
+
+                displayboxhandler disablewarn
+
+                exit
+
+            fi
+
+        }
+
+        parsevar_sqlmap_py3 () {
+
+            if [ "$sqlmap_anontor" = "true" ]; then
+
+                $infomsg "[ ON ] TOR ANON. NETWORK PROTOCOL"
+
+                sqlmap_anontor="-tor"
+
+            else
+
+                $infomsg "[ OFF ] TOR ANON. NETWORK PROTOCOL"
+
+                sqlmap_anontor=""
+
+            fi
+
+            if [ "$sqlmap_randomhttpuseragent" = "true" ]; then
+
+                $infomsg "[ ON ] RANDOMIZED HTTP HEADER / USER AGENT"
+
+                sqlmap_randomhttpuseragent="--random-agent"
+
+            else
+
+                $infomsg "[ OFF ] RANDOMIZED HTTP HEADER / USER AGENT"
+
+                sqlmap_randomhttpuseragent=""
+
+            fi
+
+            if [ "$sqlmap_beeponfound" = "true" ]; then
+
+                $infomsg "[ ON ] NOTIFICATION BEEP"
+
+                sqlmap_beeponfound="--beep"
+
+            else
+
+                $infomsg "[ OFF ] NOTIFICATION BEEP"
+
+                sqlmap_beeponfound=""
+
+            fi
+
+            if [ "$sqlmap_usebatch" = "true" ]; then
+
+                $infomsg "[ ON ] BATCH MODE"
+
+                sqlmap_usebatch="--batch"
+
+            else
+
+                $infomsg "[ OFF ] BATCH MODE"
+
+                sqlmap_usebatch=""
+
+            fi
+
+            if [ "$sqlmap_connectioncheck" = "true" ]; then
+
+                $infomsg "[ ON ] CONNECTION CHECKS"
+
+                sqlmap_connectioncheck="--check-internet"
+
+            else
+
+                $infomsg "[ OFF ] CONNECTION CHECKS"
+
+                sqlmap_connectioncheck=""
+
+            fi
+
+            if [ "$sqlmap_parseforms" = "true" ]; then
+
+                $infomsg "[ ON ] HTTP/S FORMS PARSER"
+
+                sqlmap_parseforms="--forms"
+
+            else
+
+                $infomsg "[ OFF ] HTTP/S FORMS PARSER"
+
+                sqlmap_parseforms=""
+
+            fi
+
+            if [ "$sqlmap_bruteforce_enable" = "true" ]; then
+
+                $infomsg "[ ACTIVE ] BRUTEFORCE CHECK DATABASES"
+
+            else
+
+                $infomsg "[ INACTIVE ] BRUTEFORCE CHECK DATABASES"
+
+            fi
+
+            if [ -z "$sqlmap_enum_args" ]; then
+
+                $infomsg "[ INACTIVE ] BACK-END DBMS ENUM."
+
+            else
+
+                $infomsg "[ ACTIVE ] BACK-END DBMS ENUM."
+
+            fi
+
+        }
+
+        prev_args () {
+
+            $infomsg "[ SQLMAP ] VERSION ID | "$(sqlmap --version)
+            echo ""
+            $infomsg "[ CONFIG ] $configbin/brutetool/sqlmap.ini"
+            $infomsg "[ ARGDEF ] BRUTEFORCE TYPES              | $sqlmap_brute_args"
+            $infomsg "[ ARGDEF ] ENUMERATION TYPES             | $sqlmap_enum_args"
+            $infomsg "[ ARGDEF ] DUMP OUTPUT FORMAT            | $sqlmap_dumpformat"
+            $infomsg "[ ARGDEF ] VERBOSITY LEVEL               | $sqlmap_verbosity_level"
+            $infomsg "[ ARGDEF ] TEMP DIRECTORY                | $sqlmap_tempdir"
+            $infomsg "[ ARGDEF ] SQLMAP PYTHON SCRIPT THREADS  | $sqlmap_threads"
+            $infomsg "[ VARDEF ] USER DEFINED OUTPUT DIRECTORY | $output_main"
+            $infomsg "[ VARDEF ] USER DEFINED DATA STRING      | $sqlmap_datastring"
+            $infomsg "[ VARDEF ] USER DEFINED TESTING LEVEL    | $sqlmap_tlvl"
+            $infomsg "[ VARDEF ] USER DEFINED RISK LEVEL       | $sqlmap_rlvl"
+            $infomsg "[ VARDEF ] USER DEFINED URL TARGET       | $targeturl"
+
+            sleep 10
+
+        }
+
+        sqlmap_exec () {
+
+            if [ ! "$sqlmap_bruteforce_enable" = "true" ]; then
+
+                $warningmsg "[ WARNING ] BRUTEFORCE CHECKS ARE INACTIVE... SKIPPING!"
+
+            else
+
+                sqlmap --url "$targeturl" -v "$sqlmap_verbosity_level" --threads "$sqlmap_threads" "$sqlmap_brute_args"
+
+            fi
+
+            sqlmap --param-del="&" --url "$targeturl" --data "$sqlmap_datastring" -v "$sqlmap_verbosity_level" --level "$sqlmap_tlvl" --risk "$sqlmap_rlvl" --tmp-dir "$sqlmap_tempdir" --output-dir "$output_main" --dump-format "$sqlmap_dumpformat" --threads "$sqlmap_threads" "$sqlmap_enum_args" "$sqlmap_randomhttpuseragent" "$sqlmap_anontor" "$sqlmap_beeponfound" "$sqlmap_connectioncheck" "$sqlmap_usebatch" "$sqlmap_parseforms" "$sqlmap_showETA"
+
+        }
+
+        displayboxhandler modexec
+        sqlmap_checkskip
+        parsevar_sqlmap_py3
+        prev_args
+        sqlmap_exec
+
+    }
+
+    thcssldos_tool () {
+
+        if [ "$thcssldos_enable" = "true" ]; then
+
+            displayboxhandler modexec
+
+            echo ""
+            $warningmsg "[ WARNING ] DISPLAYING LEGAL AGREEMENT!"
+            $warningmsg "By Using This Tool You Understand That Your Decision Must Be Ethical"
+            $warningmsg "The Onetrak Digital Forensics Corporation Is NOT Liable For Any Damages"
+            $warningmsg "Caused By This Program!"
+            $warningmsg "The Developer Of This Tool May Also Have A Legal Agreement Like This."
+            $warningmsg "Make Sure You Understand Ethics While Attacking A Network Target."
+            echo ""
+            $errormsg "DO YOU UNDERSTAND & AGREE? PRESS [ENTER] TO CONTINUE"
+            read nulkey
+
+            thc-ssl-dos --accept -l "$thcssldos_conlimit" "$targetip" "$targetport"
+
+        else
+
+            displayboxhandler disablewarn
+
+        fi
+
+    }
+
+}
+
+dict_mod_brutetool
+
+modhandler_brutetool () {
+
+    toolname="$1"
+
+    if [ "$toolname" = "sqlmap" ]; then
+
+        cfg_parser "$configbin/brutetool/sqlmap.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        sqlmap_tool
+
+    fi
+
+    if [ "$toolname" = "thcssldos" ]; then
+
+        cfg_parser "$configbin/brutetool/thcssldos.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        thcssldos_tool
+
+    fi
+
+}

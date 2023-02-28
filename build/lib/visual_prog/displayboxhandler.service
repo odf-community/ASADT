@@ -1,0 +1,96 @@
+displayboxhandler () {
+
+    displayid="$1"
+    displayvar="$2"
+
+    if [ "$displayid" = "legal" ]; then
+
+        legal_display
+
+    fi
+
+    if [ "$displayid" = "updatediag" ]; then
+
+        updatediag
+
+    fi
+
+    if [ "$displayid" = "manpage" ]; then
+
+        disphelp_localdoc
+
+    fi
+
+    if [ "$displayid" = "updateinfo" ]; then
+
+        updateinfo
+
+    fi
+
+    if [ "$displayid" = "modexec" ]; then
+
+        mod_execute
+
+    fi
+
+    if [ "$displayid" = "disablewarn" ]; then
+
+        mod_disablewarn
+
+    fi
+
+    if [ "$displayid" = "nmap" ]; then
+
+        zenity_nmap
+
+    fi
+
+    if [ "$displayid" = "assetfinder" ]; then
+
+        zenity_assetfinder
+
+    fi
+
+    if [ "$displayid" = "dmitry" ]; then
+
+        zenity_dmitry
+
+    fi
+
+    if [ "$displayid" = "dnsmap" ]; then
+
+        zenity_dnsmap
+
+    fi
+
+    if [ "$displayid" = "nikto" ]; then
+
+        zenity_nikto
+
+    fi
+
+    if [ "$displayid" = "msfpc" ]; then
+
+        zenity_msfpc
+
+    fi
+
+    if [ "$displayid" = "sqlmap" ]; then
+
+        zenity_sqlmap
+
+    fi
+
+    if [ "$displayid" = "thcssldos" ]; then
+
+        zenity_thcssldos
+
+    fi
+
+    if [ "$displayid" = "wpscan" ]; then
+
+        zenity_wpscan
+
+    fi
+
+}

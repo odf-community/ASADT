@@ -1,0 +1,345 @@
+dict_mod_scantool () {
+
+    nmap_tool () {
+
+        if [ "$nmap_enable" = "true" ]; then
+
+            displayboxhandler modexec
+
+            if [ "$nmap_updatedb" = "true" ]; then
+
+                $infomsg "[UPDATING NSE SCRIPT DATABASE]"
+
+                sudo nmap -v --script-updatedb
+
+                echo ""
+                echo ""
+
+            fi
+
+            if [ "$nmap_fastscan_enable" = "true" ]; then
+
+                $infomsg "[EXECUTING FAST SCAN FUNCTION]"
+
+                sudo nmap -F -oN "$nmap_fastscan_output" $targetip
+
+                echo ""
+                echo ""
+
+            fi
+
+            if [ "$nmap_traceroute_enable" = "true" ]; then
+
+                $infomsg "[EXECUTING TRACEROUTE FUNCTION]"
+
+                sudo nmap --traceroute -oN "$nmap_traceroute_output" $targetip
+
+                echo ""
+                echo ""
+            
+            fi
+
+            if [ "$nmap_fullscan_enable" = "true" ]; then
+
+                $infomsg "[EXECUTING FULL SCAN FUNCTION]"
+
+                sudo nmap -v -p 1-65535 -sV -O -sS -T5 -oN "$nmap_fullscan_output" $targetip
+
+                echo ""
+                echo ""
+
+            fi
+
+            if [ "$nmap_nsescriptscan_enable" = "true" ]; then
+
+                $infomsg "[EXECUTING NSE SCRIPT SCAN FUNCTION]"
+
+                if [ "$nmap_nsedebug_enable" = "true" ]; then
+
+                    $infomsg "[ INFO ] Debug Enabled For NSE Script Scan"
+
+                    scripttracecmd="--script-trace"
+
+                else
+
+                    echo "st=0"
+                    echo ""
+
+                fi
+
+                sudo nmap -v --script="$nmapscan_methods_define" $scripttracecmd -oN "$nmap_nsescriptscan_output" $targetip
+
+            fi
+
+        else
+
+            displayboxhandler disablewarn
+
+        fi
+
+    }
+
+    assetfinder_tool () {
+
+        if [ "$assetfinder_enable" = "true" ]; then
+
+            displayboxhandler modexec
+
+            sudo assetfinder $targethostname
+            echo $(sudo assetfinder $targethostname) > $assetfinder_default_output
+
+        else
+
+            displayboxhandler disablewarn
+
+        fi
+
+    }
+
+    dmitry_tool () {
+
+        if [ "$dmitry_enable" = "true" ]; then
+
+            displayboxhandler modexec
+
+            sudo dmitry -winsepo $dmitry_default_output $targethostname
+
+        else
+
+            displayboxhandler disablewarn
+
+        fi
+
+    }
+
+    dnsmap_tool () {
+
+        if [ "$dnsmap_enable" = "true" ]; then
+
+            displayboxhandler modexec
+
+            dnsmap $targethostname -c $dnsmap_default_output
+
+        else
+
+            displayboxhandler disablewarn
+
+        fi
+
+    }
+
+    nikto_tool () {
+
+        if [ "$nikto_enable" = "true" ]; then
+
+            displayboxhandler modexec
+
+            if [ "$nikto_http_enable" = "true" ]; then
+
+                sudo nikto -port 80 -host $targetip -output $nikto_http_output
+
+            fi
+
+            if [ "$nikto_https_enable" = "true" ]; then
+
+                    sudo nikto -port 443 -host $targetip -output $nikto_https_output
+
+            fi
+
+            if [ "$nikto_forcessl_enable" = "true" ]; then
+
+                sudo nikto -port 443 -ssl -host $targetip -output $nikto_forcessl_output
+
+            fi
+
+        else
+
+            displayboxhandler disablewarn
+
+        fi
+
+    }
+
+    wpscan_tool () {
+
+        if [ "$wpscan_enable" = "true" ]; then
+
+            displayboxhandler modexec
+
+            if [ "$wpscan_verbosity_enable" = "true" ]; then
+
+                wpscan_verbose_cmd="-v"
+
+            fi
+
+            if [ "$wpscan_enumwp" = "true" ]; then
+
+                wpscan_enum_cmd="-e $enumtype"
+
+            fi
+
+            if [ "$wpscan_randomhttpuseragent" = "true" ]; then
+
+                wpscan_rua_cmd="--rua"
+
+            fi
+
+            if [ "$wpscan_disabletls" = "true" ]; then
+
+                wpscan_disabletls_cmd="--disable-tls-checks"
+
+            fi
+
+            if [ -z "$cookiestring" ]; then
+
+                wpscan_cookiestring_cmd=""
+
+            else
+
+                wpscan_cookiestring_cmd="--cookie-string $cookiestring"
+
+            fi
+
+            if [ "$wpscan_httpauth" = "true" ]; then
+
+                $warningmsg "[ WARNING ] HTTP AUTH ENABLED!"
+                $warningmsg "[ WARNING ] REQUESTING CREDENTIALS!"
+                $infomsg "[ INFO ] Press [ENTER] to disable"
+                echo ""
+
+                $warningmsg -n "Enter Credentials [format user:pass]: "
+
+                read httpauthtoken
+
+                if [ -z "$httpauthtoken" ]; then
+
+                    echo ""
+                    $warningmsg "[ WARNING ] HTTP AUTH DISABLED!"
+
+                    wpscan_httpauth_cmd=""
+
+                else
+                    
+                    echo ""
+
+                    wpscan_httpauth_cmd="--http-auth $httpauthtoken"
+
+                fi
+
+            fi
+
+            if [ "$wpscan_forcescan" = "true" ]; then
+
+                wpscan_force_cmd="--force"
+
+            fi
+
+            if [ "$wpscan_dbupdate" = "true" ]; then
+
+                wpscan --update
+
+            fi
+
+            if [ -z "$wpscan_apitoken" ]; then
+
+                $warningmsg "[ WARNING ] NO API TOKEN DEFINED! SCAN RESULTS MAY BE DIMINISHED!"
+
+                wpscan_api_cmd=""
+
+            else
+
+                $warningmsg "[ WARNING ] API TOKEN FOUND! USING WPSCAN API!"
+
+                wpscan_api_cmd="--api-token $wpscan_apitoken"
+
+            fi
+
+            echo ""
+
+            $errormsg "[ MODULE EXECUTE ] wpscan -t "$wpscan_maxthreads" --url "$targeturl" $wpscan_api_cmd $wpscan_verbose_cmd $wpscan_forcescan_cmd $wpscan_rua_cmd $wpscan_disabletls_cmd $wpscan_httpauth_cmd $wpscan_cookiestring_cmd $wpscan_enum_cmd -o "$wpscan_default_output" -f "$wpscan_default_output_format""
+
+            wpscan -t "$wpscan_maxthreads" --url "$targeturl" $wpscan_api_cmd $wpscan_verbose_cmd $wpscan_forcescan_cmd $wpscan_rua_cmd $wpscan_disabletls_cmd $wpscan_httpauth_cmd $wpscan_cookiestring_cmd $wpscan_enum_cmd -o "$wpscan_default_output" -f "$wpscan_default_output_format"
+
+            $errormsg "[ MODULE EXECUTE ] Output saved to $output_main using format [$wpscan_default_output_format]"
+
+            echo ""
+
+        fi
+
+    }
+
+}
+
+dict_mod_scantool
+
+modhandler_scantool () {
+
+    toolname="$1"
+
+    if [ "$toolname" = "nmap" ]; then
+
+        cfg_parser "$configbin/scantool/nmap.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        nmap_tool
+
+    fi
+
+    if [ "$toolname" = "assetfinder" ]; then
+
+        cfg_parser "$configbin/scantool/assetfinder.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        assetfinder_tool
+
+    fi
+
+    if [ "$toolname" = "dmitry" ]; then
+
+        cfg_parser "$configbin/scantool/dmitry.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        dmitry_tool
+
+    fi
+
+    if [ "$toolname" = "dnsmap" ]; then
+
+        cfg_parser "$configbin/scantool/dnsmap.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        dnsmap_tool
+
+    fi
+
+    if [ "$toolname" = "nikto" ]; then
+
+        cfg_parser "$configbin/scantool/nikto.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        nikto_tool
+
+    fi
+
+    if [ "$toolname" = "wpscan" ]; then
+
+        cfg_parser "$configbin/scantool/wpscan.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        wpscan_tool
+
+    fi
+
+}

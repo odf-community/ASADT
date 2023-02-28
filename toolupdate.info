@@ -1,0 +1,41 @@
+newversion='v1.1.7'
+
+
+
+# Package Version Info:
+# Release ID: {release-git11702252023}
+# Release Version: {v1.1.7}
+# Release Codename: {ALPHA}
+# Release License: {GNU GPL v3}
+# Release Compatability Check: {✓}
+# Compatability Test Environment-{MS Visual Studio Code v1.74.3_x64}
+# Compatability Tested Using Bash-{5.2.15(1)-release (x86_64-pc-linux-gnu)}
+# Compatability Tested On ParrotOS-{Version 5.1 > Electro Ara}
+# Compatability Tested On KaliOS-{Kali-Rolling 2022.4 > Kernel 6.0.0}
+
+
+
+# GitHub ChangeLog:
+# Updated mini build to v1.1.7
+# Repository Refresh.
+
+
+# Build Script ChangeLog:
+# No Changes
+
+
+
+# Main Script ChangeLog:
+# Fixed Temp Directory Errors. Created TmpHandle to fix this.
+
+
+# Toolkit ChangeLog:
+# Adding new sysutil module soon!
+# NOTICE!! Parrot OS Does Not Come With WPScan! This will cause apt_src_chk to fail!
+# This was the reason for the message skip and tmphandle update.
+
+
+# Notices:
+# Our company now has a website!
+# Check it out here -
+# https://odfsec.org/

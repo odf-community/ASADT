@@ -1,0 +1,626 @@
+# messages #
+
+error_operationcancelled () {
+
+    zenity --error \
+    --text="Error! Operation Canceled At Users Request!"
+    
+}
+
+legal_display () {
+
+
+    zenity --warning \
+    --title="Legal Disclaimer" \
+    --window-icon="$mod_icon" \
+    --width="500" \
+    --text="Usage of the Assistive Search And Discovery Tool [MK-II] for attacking or gathering information from targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. The Onetrak Digital Forensics Corporation, and their developers, assume no liability and are not responsible for any misuse or damage caused by this program."
+        
+    echo "legalagree=true" >> "$mainbin/mainprog/ini/global.ini"
+
+}
+
+updatediag () {
+
+    zenity --info \
+    --title="Update Function Information" \
+    --width="500" \
+    --text="This update command uses the binary package 'wget' to download the build script from https://raw.github.com. If you would like to cancel this operation, please press CTRL+C within 5 seconds of closing this message!"
+
+    sleep 5
+
+}
+
+updateinfo () {
+
+    zenity --text-info \
+    --title="Update $newversion Information (ChangeLog)" \
+    --window-icon="$mod_icon" \
+    --width="1000" \
+    --height="600" \
+    --filename="/tmp/asadt/toolupdate.info"
+
+    sleep 5
+
+}
+
+disphelp_localdoc () {
+
+    zenity --text-info \
+    --title="ASADT MARK 2 $currentversion ($currentreleaseversion) Help Document" \
+    --window-icon="$mod_icon" \
+    --width="1000" \
+    --height="600" \
+    --filename="$manpage"
+
+}
+
+mod_disablewarn () {
+
+    if [ "$module_id" = "scantool" ]; then
+
+        module_version_title="scantool"
+
+    elif [ "$module_id" = "brutetool" ]; then
+
+        module_version_title="brutetool"
+
+    else
+
+        module_version_title="exemkr"
+
+    fi
+
+    echo ""
+
+    $errormsg "[ ERROR ] {"$script_id"} Script Is Disabled In $configbin/$module_version_title/$script_id.ini"
+    $infomsg "[ INFO ] To Enable The {"$script_id"} Script, Please Alter "$script_id"_enable In Toolkit Configuration"
+    $infomsg "[ INFO ] To Equal "'"true"'""
+
+}
+
+mod_execute () {
+
+    echo ""
+    $errormsg "  █████╗  ███████╗  █████╗  ██████╗  ████████╗"
+    $errormsg " ██╔══██╗ ██╔════╝ ██╔══██╗ ██╔══██╗ ╚══██╔══╝"
+    $errormsg " ███████║ ███████╗ ███████║ ██║  ██║    ██║"
+    $errormsg " ██╔══██║ ╚════██║ ██╔══██║ ██║  ██║    ██║"
+    $errormsg " ██║  ██║ ███████║ ██║  ██║ ██████╔╝    ██║"
+    $errormsg " ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═════╝     ╚═╝"
+    $errormsg " Assistive Search And Discovery Tool $currentversion"
+    $errormsg " ------------------------------------------------------"
+    $errormsg " Starting '$script_id' {V. $script_version} - Target $targetip $targetport $targethostname $targeturl"
+    echo ""
+    $errormsg " Happy Hacking :p"
+
+    if [ "$module_id" = "scantool" ]; then
+
+        module_version_title="$mod_scantool_version"
+
+    elif [ "$module_id" = "brutetool" ]; then
+
+        module_version_title="$mod_brutetool_version"
+
+    else
+
+        module_version_title="$mod_exemkr_version"
+
+    fi
+
+    echo ""
+    $errormsg "[ MODULE EXECUTE ] moduleid-{"$module_id"} moduleversion-{$module_version_title} scriptid-{$script_id} scriptversion-{"$script_version"}"
+    $errormsg "[ MODULE EXECUTE ] modroot-{"$modroot"} </> "$module_id".module/"$script_id"/"$script_version" @ dict_mod_"$module_id""
+    $errormsg "[ MODULE EXECUTE ] Copy And Paste This When Making A Bug Report @ https://github.com/odf-community/ASADT/discussions"
+    echo ""
+
+    if [ "$debug_module" = "true" ]; then
+
+        $errormsg "[ MODULE DEBUG ] Debug Data For module-{"$module_id"} scriptid-{"$script_id"}"
+        echo ""
+
+
+        $errormsg "[ MODULE DEBUG ] {$module_id} Module Function Dictionary"
+        echo ""
+
+        cat "$modroot/"$module_id".module"
+
+        echo ""
+        echo ""
+        $errormsg "[ MODULE DEBUG ] {$script_id} Script Configuration"
+        echo ""
+        
+        cat ""$configbin"/"$module_id"/"$script_id".ini"
+
+        echo ""
+        echo ""
+
+        $errormsg "[ MODULE DEBUG ] PROGRAM SLEEP - 10 SECONDS!"
+
+        sleep 10
+
+    fi
+
+    echo ""
+    sleep 5
+
+}
+
+zenity_nmap () {
+
+    WIZGUI_nmapgui=$(
+    zenity --forms \
+    --title="ASADT ScanTool WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter Nmap Scan Variables" \
+    --separator="%" \
+    --add-entry="Target IP [IP Addr.]: " \
+    --add-entry="NSE Script Scan Methods [Method(s)]: " \
+    --add-entry="Scan Output Directory [Directory]: " )
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targetip=$(awk -F% '{print $1}' <<<$WIZGUI_nmapgui)
+    nmapscan_methods_define=$(awk -F% '{print $2}' <<<$WIZGUI_nmapgui)
+    output_main=$(awk -F% '{print $3}' <<<$WIZGUI_nmapgui)
+
+    if [ -z "$targetip" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targetip} or {targethostname}!"
+
+        exit
+
+    fi
+
+    if [ -z "$nmapscan_methods_define" ]; then
+
+        zenity --warning \
+        --text="Notice! No {nmapscan_method_define} Variable Was Set, Using Default Variable Data {nmapscan_method_define = 'default'}"
+
+        nmapscan_methods_define=default
+
+    fi
+
+}
+
+zenity_assetfinder () {
+
+    WIZGUI_assetfindergui=$(
+    zenity --forms \
+    --title="ASADT ScanTool WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter AssetFinder Scan Variables" \
+    --separator="," \
+    --add-entry="Target Hostname/IP [Hostname/IP]: " \
+    --add-entry="Scan Output Directory [Directory]: ")
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targethostname=$(awk -F, '{print $1}' <<<$WIZGUI_assetfindergui)
+    output_main=$(awk -F, '{print $2}' <<<$WIZGUI_assetfindergui)
+
+    if [ -z "$targethostname" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targetip} or {targethostname}"
+
+        exit
+
+    fi
+
+}
+
+zenity_dmitry () {
+
+    WIZGUI_dmitrygui=$(
+    zenity --forms \
+    --title="ASADT ScanTool WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter Dmitry Scan Variables" \
+    --separator="," \
+    --add-entry="Target Hostname/Domain [HN./Domain]: " \
+    --add-entry="Scan Output Directory [Directory]: ")
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targethostname=$(awk -F, '{print $1}' <<<$WIZGUI_dmitrygui)
+    output_main=$(awk -F, '{print $2}' <<<$WIZGUI_dmitrygui)
+
+    if [ -z "$targethostname" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targethostname} or {targetdomain}!"
+
+        exit
+
+    fi
+
+}
+
+zenity_dnsmap () {
+
+    WIZGUI_dnsmapgui=$(
+    zenity --forms \
+    --title="ASADT ScanTool WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter DnsMap Scan Variables" \
+    --separator="," \
+    --add-entry="Target Domain/Hostname [Domain/HN.]: " \
+    --add-entry="Scan Output Directory [Directory]: ")
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targethostname=$(awk -F, '{print $1}' <<<$WIZGUI_dnsmapgui)
+    output_main=$(awk -F, '{print $2}' <<<$WIZGUI_dnsmapgui)
+
+    if [ -z "$targethostname" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targethostname} or {targetdomain}!"
+
+        exit
+
+    fi
+
+}
+
+zenity_nikto () {
+
+    WIZGUI_niktogui=$(
+    zenity --forms \
+    --title="ASADT ScanTool WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter Nikto Scan Variables" \
+    --separator="," \
+    --add-entry="Target IP [IP Addr.]: " \
+    --add-entry="Scan Output Directory [Directory]: ")
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targetip=$(awk -F, '{print $1}' <<<$WIZGUI_niktogui)
+    output_main=$(awk -F, '{print $2}' <<<$WIZGUI_niktogui)
+
+    if [ -z "$targetip" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targetip}!"
+
+        exit
+
+    fi
+
+}
+
+zenity_wpscan () {
+
+    WIZGUI_wpscangui=$(
+    zenity --forms \
+    --title="ASADT ScanTool WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter WPScan Scan Variables" \
+    --separator="~" \
+    --add-entry="Target URL/Domain [URL/Domain]: " \
+    --add-entry="Enumeration Types [vp,vt]: " \
+    --add-entry="Cookie String [cookie1=a[; cookie2]]: " \
+    --add-entry="Scan Output Directory [Directory]: ")
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targeturl=$(awk -F~ '{print $1}' <<<$WIZGUI_wpscangui)
+    enumtype=$(awk -F~ '{print $2}' <<<$WIZGUI_wpscangui)
+    cookiestring=$(awk -F~ '{print $3}' <<<$WIZGUI_wpscangui)
+    output_main=$(awk -F~ '{print $4}' <<<$WIZGUI_wpscangui)
+
+    if [ -z "$targeturl" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targeturl}!"
+
+        exit
+
+    fi
+
+    if [ -z "$enumtype" ]; then
+
+        zenity --warning \
+        --text="Notice! No {enumtype} Variable Was Set! Using Default Variable Data {enumtpye = 'ap,cb'}!"
+
+        enumtype="ap,cb"
+
+    fi
+
+    if [ -z "$cookiestring" ]; then
+
+        zenity --warning \
+        --text="Notice! No {cookiestring} Variable Was Set! Setting Variable To {cookiestring = 'nul'}!"
+
+        cookiestring=""
+
+    fi
+
+}
+
+zenity_msfpc () {
+
+    WIZGUI_exemkr_custom=$(
+    zenity --forms \
+    --title="ASADT Custom Payload Generator WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter Payload Generator Variables" \
+    --separator="," \
+    --add-entry="HOST IP/Interface ID [IP/eth0]: " \
+    --add-entry="Payload Type [windows/exe etc.]: " \
+    --add-entry="Payload CMD Shell [cmd/msf]: " \
+    --add-entry="Payload Port Number [Port #]: " \
+    --add-entry="Payload Connection Type [reverse/bind]: " \
+    --add-entry="Payload Staging Type [staged/stageless]: " \
+    --add-entry="Payload Link Type [tcp/https etc.]: " \
+    --add-entry="Payload Output Directory [Directory]: ")
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    pnetinterfaceid=$(awk -F, '{print $1}' <<<$WIZGUI_exemkr_custom)
+    ptype=$(awk -F, '{print $2}' <<<$WIZGUI_exemkr_custom)
+    pcmd=$(awk -F, '{print $3}' <<<$WIZGUI_exemkr_custom)
+    pport=$(awk -F, '{print $4}' <<<$WIZGUI_exemkr_custom)
+    pconnecttype=$(awk -F, '{print $5}' <<<$WIZGUI_exemkr_custom)
+    pstagetype=$(awk -F, '{print $6}' <<<$WIZGUI_exemkr_custom)
+    plinktype=$(awk -F, '{print $7}' <<<$WIZGUI_exemkr_custom)
+    output_main=$(awk -F, '{print $8}' <<<$WIZGUI_exemkr_custom)
+
+    # LARGE AWK ORDERS MAY LAG OLDER KERNELS
+    # SLEEP IS FOR OLDER KERNELS
+    sleep 3
+
+    if [ -z "$pnetinterfaceid" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {pnetinterfaceid}!"
+
+        exit
+
+    fi
+
+    if [ -z "$ptype" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {ptype}!"
+
+        exit
+
+    fi
+
+    if [ -z "$pcmd" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {pcmd}!               "
+
+        exit
+
+    fi
+
+    if [ -z "$pport" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {pport}!"
+
+        exit
+
+    fi
+
+    if [ -z "$pconnecttype" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {pconnecttype}!"
+
+        exit
+
+    fi
+
+    if [ -z "$pstagetype" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing {pstagetype}!"
+
+        exit
+
+    fi
+
+    if [ -z "$plinktype" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {plinktype}!"
+
+        exit
+
+    fi
+
+}
+
+zenity_sqlmap () {
+
+    WIZGUI_sqlmap=$(
+    zenity --forms \
+    --title="ASADT BruteTool WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter SQLMap Injection Variables" \
+    --separator="," \
+    --add-entry="Full Target URL [URL/FORM]: " \
+    --add-entry="Data String [ex. id=1&pass=pw]: " \
+    --add-entry="Test Level [1-5]: " \
+    --add-entry="Risk Level [1-3]: " \
+    --add-entry="Dump Output Directory [Directory]: ")
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targeturl=$(awk -F, '{print $1}' <<<$WIZGUI_sqlmap)
+    sqlmap_datastring=$(awk -F, '{print $2}' <<<$WIZGUI_sqlmap)
+    sqlmap_tlvl=$(awk -F, '{print $3}' <<<$WIZGUI_sqlmap)
+    sqlmap_rlvl=$(awk -F, '{print $4}' <<<$WIZGUI_sqlmap)
+    output_main=$(awk -F, '{print $5}' <<<$WIZGUI_sqlmap)
+
+    if [ -z "$targeturl" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targeturl}!"
+
+        exit
+
+    fi
+
+    if [ -z "$sqlmap_datastring" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {sqlmap_datastring}!"
+
+        exit
+
+    fi
+
+    if [ "$sqlmap_tlvl" -gt "5" ]; then
+
+        zenity --warning \
+        --text="Notice! Test Level Surpassed The Range Of '1-5'! Using Default Value Of '1'"
+
+        sqlmap_tlvl="1"
+
+    elif [ "$sqlmap_tlvl" -lt "1" ]; then
+
+        zenity --warning \
+        --text="Notice! Test Level Surpassed The Range Of '1-5'! Using Default Value Of '1'"
+
+        sqlmap_tlvl="1"
+
+    fi
+
+    if [ "$sqlmap_rlvl" -gt "3" ]; then
+
+        zenity --warning \
+        --text="Notice! Risk Level Surpassed The Range Of '1-3'! Using Default Value Of '1'"
+
+        sqlmap_rlvl="1"
+
+    elif [ "$sqlmap_rlvl" -lt "1" ]; then
+
+        zenity --warning \
+        --text="Notice! Risk Level Surpassed The Range Of '1-3'! Using Default Value Of '1'"
+
+        sqlmap_rlvl="1"
+
+    fi
+
+}
+
+zenity_thcssldos () {
+
+    WIZGUI_thcssldos=$(
+    zenity --forms \
+    --title="ASADT BruteTool WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter THC-SSL-DOS Variables" \
+    --separator="," \
+    --add-entry="Target IP [IP Addr.]: " \
+    --add-entry="Target Port Number [Port #]: " )
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targetip=$(awk -F, '{print $1}' <<<$WIZGUI_thcssldos)
+    targetport=$(awk -F, '{print $2}' <<<$WIZGUI_thcssldos)
+
+    if [ -z "$targetip" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targetip}!"
+
+        exit
+
+    fi
+
+    if [ -z "$targetport" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targetport}!"
+
+        exit
+
+    fi
+
+    output_main="/tmp/thcssldos"
+    default_output_location=""
+
+    mkdir -p "$output_main"
+
+}

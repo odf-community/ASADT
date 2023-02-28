@@ -1,0 +1,181 @@
+ASADT HELPDOC | V1.1.7 | CODENAME ALPHA
+KALI OS EXCLUSIVE | PARROT OS COMPATIBLE
+
+    -- TOC --
+1. Script Usage
+2. Global Settings
+3. CnfEdit Tool
+4. Configuration Help
+5. Miscellaneous
+
+
+
+
+
+
+
+
+
+
+1. Script Usage
+
+ASADT scripts version 1.1.0 and above are now located in the '/usr/bin/asadt' directory.
+You can either call upon its location or cd into '/usr/bin/asadt' to execute the script.
+
+On most Debian systems, scripts and tools are installed under the '/usr/bin' directory.
+The main script now detects if you have the required dependencies and files to run the program.
+This function is named 'file-src-chk/apt-src-chk' and it detects what packages you need to install to correctly use the program,
+as well as confirms the existance of required program extensions before launch.
+
+To execute ASADT with all the proper permissions, please ensure you execute with the 'sudo' command prior.
+Starting the script without sudo permissions may cause the program to fail its pre-inspection functions.
+
+All functions within the main program script "asadt.sh" have been explain at the bottom of the file.
+This script is open-source, and no code has been determined as malicious in nature.
+To Execute The Script:
+
+1. sudo /usr/bin/asadt/asadt.sh [-h] [-hh] [-v] [--update] [--quickarg] [--cnfedit+arg] [--scantool+arg] [--brutetool+arg] [--exemkr]
+
+2. cd /usr/bin/asadt && sudo ./asadt.sh [-h] [-hh] [-v] [--update] [--quickarg] [--cnfedit+arg] [--scantool+arg] [--brutetool+arg] [--exemkr]
+
+Toolkit Arguments:
+
+    1. ScanTool
+
+    ./asadt.sh --scantool assetfinder
+    ./asadt.sh --scantool dmitry
+    ./asadt.sh --scantool dnsmap
+    ./asadt.sh --scantool nikto
+    ./asadt.sh --scantool nmap
+    ./asadt.sh --scantool wpscan
+
+    2. BruteTool
+
+    ./asadt.sh --brutetool sqlmap
+    ./asadt.sh --brutetool thcssldos
+
+    3. ExeMkr
+
+    ./asadt.sh --exemkr
+
+Configuration Editor Arguments:
+
+    1. CnfEdit
+
+    ./asadt.sh --cnfedit
+    ./asadt.sh --cnfedit global
+    ./asadt.sh --cnfedit 'toolname'
+    ./asadt.sh --cnfedit 'filename'
+
+Main Program Arguments:
+
+    1. Help Command
+
+    ./asadt.sh -h
+    ./asadt.sh -hh
+
+    2. Version Command
+
+    ./asadt.sh -v
+
+    3. Update Command
+
+    ./asadt.sh --update
+
+    4. QuickArg Menu
+
+    ./asadt.sh --quickarg
+
+
+
+2. Global Settings [NEW]
+
+ASADT script version 1.1.0 and higher now have access to 3 global settings within
+the program configuration.
+
+'default_output_location' is used as a global output handler.
+setting this will allow the user to output data from all the tools to 1 location.
+Please remember that running a tool again in that same location will wipe previous outputted data.
+
+'debug_module' is used as a global switch. Setting this to true will enable debug output
+when executing a specific module & script.
+
+'legalagree' is used as a global switch. Setting this to true will accept the startup legal agreement.
+Some tools provided in the brutetool may require other legal agreements, these must be accepted on each 
+execution.
+
+To edit the global settings using the scripts built in Configuration Editor,
+Please refer to [TOC:PAGE:1:SECTION:CONFIGURATIONEDITORARGUMENTS]
+
+Please note:
+The global settings are reset to their defaults upon update and must be re-applied.
+
+
+
+3. CnfEdit Tool
+
+First released in MARK 2 BETA v1.0.8, this tiny internal program can find and edit
+specific tool configuration files to help them work to the user-specific needs.
+
+In version 1.1.0, this command now can edit global settings as well.
+
+Notice: This internal program requires the 'nano' or 'vim' packages to operate.
+
+As of script version 1.1.0, When the user updates the program, they now have the option to utilize the 'configrewind' function.
+This function allows the user (say when updating from 1.1.0 --> 1.1.1) to revert their edited configuration files from version
+1.1.0, while also applying updates to any files that need such updates.
+
+
+
+4. Configuration Help
+
+Every configuration file has 3 different option sections.
+
+1. [ScriptInfo] 2. [ScriptEnablers] 3. [ScriptVariables]
+
+1. [ScriptInfo] is used to inform the displayboxhandler.service of the current module info. DO NOT EDIT THIS SECTION!
+2. [ScriptEnablers] are normally true or false and or singular numeric values that are used to enable or disable specific parts of the script.
+3. [ScriptVariables] are used to define output filenames or other options, however, do NOT use filenames as a location handler. This Could Cause Damage.
+
+Some scripts with a lot of tool options might come with independent help information inside their ini files.
+
+
+MainProg InI Files:
+
+[ GLOBAL.INI FILE ]
+The 'global.ini' file is used to enable & disable global settings for ASADT, such as the default output location.
+
+[ MAIN.INI FILE ]
+The 'main.ini' file is used to inform the program of it's current version for updates, as well as location variables for program libraries and configurations.
+It is extremely discouraged to edit any section within this file, doing so may harm your system, and or the program and will require a fresh install.
+
+[ MODULES.INI FILE ]
+This 'modules.ini' file is used to help locate the current modules on the system, as well as provide version information for said modules which are important
+to determine configuration updates when updating to a newer version. DO NOT EDIT THIS FILE!
+
+
+
+5. Miscellaneous
+
+'ANSI' >  ANSI escape codes in pure bash - change text color, position the cursor, and much more!
+https://github.com/fidian/ansi
+
+'bash-ini-parser' > A ini file parser for bash relying only on builtins!
+https://github.com/albfan/bash-ini-parser
+
+'Zenity' > Create simple dialogs that interact graphically with the user!
+https://help.gnome.org/users/zenity/stable/index.html
+
+Huge Thank You & Shout Out To These Two Developers For Collaboration!
+
+@Fidian (https://github.com/fidian)
+@Albfan (https://github.com/albfan)
+
+ODFSEC Developer List:
+
+ID#9990909 - CEO/Founder/Director (Full Program & Script Development)
+ID#8475900 - Lead Bash Developer (Bash Prog-FrameWork)
+ID#7070235 - Lead Lib Developer (ZenityGUI/InI)
+
+HelpDoc/ManPage For The Assistive Search And Discovery Tool Mark 2 Alpha Version 1.1.7 (release-git11702252023)
+iloveu=true

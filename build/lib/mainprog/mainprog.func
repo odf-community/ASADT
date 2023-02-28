@@ -1,0 +1,651 @@
+dispversion () {
+
+    echo ""
+    $errormsg "            (                ( "
+    sleep 1
+    $errormsg "    (       )\ )     (       )\ )     *   ) "
+    sleep 1
+    $errormsg "    )\     (()/(     )\     (()/(     )  /( "
+    sleep 1
+    $errormsg " ((((_)(    /(_)) ((((_)(    /(_))   ( )(_))  [A]ssistive "
+    sleep 1
+    $errormsg "  )\ _ )\  (_))    )\ _ )\  (_))_   (_(_())   [S]earch "
+    sleep 1
+    $errormsg "  (_)_\(_) / __|   (_)_\(_)  |   \  |_   _|   [A]nd "
+    sleep 1
+    $errormsg "   / _ \   \__ \    / _ \    | |) |   | |     [D]iscovery "
+    sleep 1
+    $errormsg "  /_/ \_\  |___/   /_/ \_\   |___/    |_|     [T]ool"
+    sleep 3
+    $errormsg " ------------------------------------------ "
+    $errormsg "         Script Developed By ODFSEC "
+    $errormsg "          [$currentversion] [MARK II $codename] "
+    echo ""
+    $errormsg "             https://odfsec.org"
+    $errormsg "         W3 4R3 0DFS3C • iloveu=true "
+    echo ""
+
+}
+
+mainmenu_full () {
+
+    echo ""
+    $errormsg "  █████╗  ███████╗  █████╗  ██████╗  ████████╗"
+    $errormsg " ██╔══██╗ ██╔════╝ ██╔══██╗ ██╔══██╗ ╚══██╔══╝"
+    $errormsg " ███████║ ███████╗ ███████║ ██║  ██║    ██║"
+    $errormsg " ██╔══██║ ╚════██║ ██╔══██║ ██║  ██║    ██║"
+    $errormsg " ██║  ██║ ███████║ ██║  ██║ ██████╔╝    ██║"
+    $errormsg " ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═════╝     ╚═╝"
+    $errormsg " Assistive Search And Discovery Tool $currentversion"
+    echo ""
+    $errormsg " -= QUICKARG MENU =-"
+    echo "" 
+    $errormsg " [1] Use ScanTool Module"
+    $errormsg " [2] Use BruteTool Module"
+    $errormsg " [3] Use ExeMkr Module"
+    $errormsg " [4] Edit Toolkit Configuration"
+    $errormsg " [5] Edit Global Script Settings"
+    $errormsg " [6] Check For Script Updates"
+    $errormsg " [7] View Help Info"
+    $errormsg " [8] View Full HelpDoc/ManPage"
+    $errormsg " [9] View Version Info"
+    echo ""
+    $errormsg -n " Please Select Numerical Option [1-9]: "
+
+    read -r numid_wizmenu
+
+    echo ""
+
+    if [ "$numid_wizmenu" = "1" ]; then
+
+        echo ""
+        $errormsg " -= SCANTOOL MODULE TOOLKIT =-"
+        echo ""
+        $errormsg " [1] Assetfinder Tool"
+        $errormsg " [2] Dmitry Tool"
+        $errormsg " [3] DnsMap Tool"
+        $errormsg " [4] Nikto Tool"
+        $errormsg " [5] NMap Tool"
+        $errormsg " [6] WPScan Tool"
+        echo "" 
+        $errormsg -n " Please Select Numerical Option [1-5]: "
+
+        read -r numid_scantoolmenu
+
+        if [ "$numid_scantoolmenu" = "1" ]; then
+
+            /usr/bin/asadt/asadt.sh --scantool assetfinder
+
+        elif [ "$numid_scantoolmenu" = "2" ]; then
+
+            /usr/bin/asadt/asadt.sh --scantool dmitry
+
+        elif [ "$numid_scantoolmenu" = "3" ]; then
+
+            /usr/bin/asadt/asadt.sh --scantool dnsmap
+
+        elif [ "$numid_scantoolmenu" = "4" ]; then
+
+            /usr/bin/asadt/asadt.sh --scantool nikto
+
+        elif [ "$numid_scantoolmenu" = "5" ]; then
+
+            /usr/bin/asadt/asadt.sh --scantool nmap
+
+        elif [ "$numid_scantoolmenu" = "6" ]; then
+
+            /usr/bin/asadt/asadt.sh --scantool wpscan
+
+        else
+
+            echo ""
+            $errormsg " [ ERROR ] Please Enter Numerical Option ID"
+            $errormsg " [ ERROR ] Invalid Input: $numid_scantoolmenu"
+            echo ""
+
+            exit
+
+        fi
+
+    elif [ "$numid_wizmenu" = "2" ]; then
+
+        echo ""
+        $errormsg " -= BRUTETOOL MODULE TOOLKIT =-"
+        echo ""
+        $errormsg " [1] SqlMap Tool"
+        $errormsg " [2] THC-SSL-DOS Tool"
+        echo ""
+        $errormsg -n " Please Select Numerical Option [1-2]: "
+        
+        read -r numid_brutetoolmenu
+
+        if [ "$numid_brutetoolmenu" = "1" ]; then
+
+            /usr/bin/asadt/asadt.sh --brutetool sqlmap
+
+        elif [ "$numid_brutetoolmenu" = "2" ]; then
+
+            /usr/bin/asadt/asadt.sh --brutetool thcssldos
+
+        else
+
+            echo ""
+            $errormsg " [ ERROR ] Please Enter Numerical Option ID"
+            $errormsg " [ ERROR ] Invalid Input: $numid_brutetoolmenu"
+            echo ""
+
+            exit
+
+        fi
+
+    elif [ "$numid_wizmenu" = "3" ]; then
+
+        /usr/bin/asadt/asadt.sh --exemkr
+
+    elif [ "$numid_wizmenu" = "4" ]; then
+
+        /usr/bin/asadt/asadt.sh --cnfedit
+
+    elif [ "$numid_wizmenu" = "5" ]; then
+
+        /usr/bin/asadt/asadt.sh --cnfedit global
+
+    elif [ "$numid_wizmenu" = "6" ]; then
+
+        /usr/bin/asadt/asadt.sh --update
+
+    elif [ "$numid_wizmenu" = "7" ]; then
+
+        /usr/bin/asadt/asadt.sh -h
+
+    elif [ "$numid_wizmenu" = "8" ]; then
+
+        /usr/bin/asadt/asadt.sh -hh
+
+    elif [ "$numid_wizmenu" = "9" ]; then
+
+        /usr/bin/asadt/asadt.sh -v
+
+    else
+
+        echo ""
+        $errormsg " [ ERROR ] Please Enter Numerical Option ID"
+        $errormsg " [ ERROR ] Invalid Input: $numid_wizmenu"
+        echo ""
+        
+        exit
+
+    fi
+
+    exit
+
+}
+
+disphelp () {
+
+    . "/etc/os-release"
+
+    echo ""
+    $infomsg "[Script Usage]"
+    $infomsg "--------------------"
+    $infomsg "Execute: $0 [handler] [argument]"
+    echo ""
+    $infomsg "Main Program Commands:"
+    echo ""
+    $infomsg "-h, -hh                | Display this help display, or the entire local help document (-hh)"
+    $infomsg "-v                     | Show Current Program Version, and a cool banner ☺"
+    $infomsg "--update               | Checks for programs using 'wget', and capture updates using 'git' cli."
+    $infomsg "--quickarg             | Shows the quick argument menu, executing a specific tool with minimal command input."
+    echo ""
+    $infomsg "ToolKit Commands:"
+    echo ""
+    $infomsg "'--brutetool' refers to any tool that executes brute-force like processes."
+    $infomsg "'--scantool' refers to any tool that executes network analysis like processes."
+    $infomsg "'--exemkr' refers to any tool that executes device exploitation like processes."
+    echo ""
+    $infomsg "--exemkr               | Launches the MetaSploit FrameWork Payload Creator device exploitation tool."
+    echo ""
+    $infomsg "--brutetool sqlmap     | Launches the SQLMAP brute-forcing tool."
+    $infomsg "--brutetool thcssldos  | Launches the THC-SSL-DOS brute-forcing tool."
+    echo ""
+    $infomsg "--scantool assetfinder | Launches the AssetFinder sub-domain analysis tool."
+    $infomsg "--scantool dmitry      | Launches the Dmitry domain information analysis tool."
+    $infomsg "--scantool dnsmap      | Launches the DNSMap DNS network mapping tool."
+    $infomsg "--scantool nikto       | Launches the Nikto webserver & CGI analysis tool."
+    $infomsg "--scantool nmap        | Launches the NMap system, port, and network analysis tool."
+    $infomsg "--scantool wpscan      | Launches the WPScan WordPress vulnrebility analysis tool."
+    echo ""
+    $infomsg "Configuration Editor Commands:"
+    echo ""
+    $infomsg "--cnfedit              | Launches the toolkit configuration editor for easy configuration editing."
+    $infomsg "--cnfedit global       | Launches the global configuration editor for editing global settings."
+    $infomsg "--cnfedit 'toolname'   | Launches the cnfedit tool with a wildcard tool name as the file culprit."
+    $infomsg "--cnfedit 'filename'   | Launches the cnfedit tool with a arbitrary file name as the file culprit."
+    $infomsg "           ↳ Can include tool name, main program ini file name, or arbitrary configuration file name."
+    echo ""
+    $infomsg "[Current Global Settings]"
+    $infomsg "-------------------------------"
+    
+    if [ -z "$default_output_location" ]; then
+
+        $infomsg "Default Output Location: $( $errormsg "NOT DEFINED" )"
+    
+    else
+
+        $infomsg "Default Output Location: $( $successmsg "DEFINED [$default_output_location]" )"
+
+    fi
+
+    if [ "$debug_module" = "true" ]; then
+
+        $infomsg "Module Debug Mode: $( $successmsg "[ACTIVE]" )"
+
+    else
+
+        $infomsg "Module Debug Mode: $( $errormsg "[DISABLED]" )"
+
+    fi
+
+    echo ""
+    $infomsg "[Package Information]"
+    $infomsg "---------------------------"
+    $infomsg "Package Version: $( $successmsg "$currentversion" )"
+    $infomsg "Package Release Version: $( $successmsg "$currentreleaseversion" )"
+    $infomsg "Zenity Version: $( $successmsg "$( zenity --version )" )"
+    
+    if [ -z "$PRETTY_NAME" ]; then
+    
+        $infomsg "Operating System: $( $warningmsg "$ID - $ID_LIKE Like" )"
+        
+    else
+    
+        $infomsg "Operating System: $( $successmsg "$PRETTY_NAME" )"
+
+    fi
+
+    echo ""
+    $infomsg "[More Help?]"
+    $infomsg "--------------"
+    $infomsg "Execute: $0 -hh"
+    $infomsg "↳ You can also read our wiki here https://github.com/odf-community/ASADT/wiki"
+    echo ""
+
+}
+
+disphelp_full () {
+
+    echo ""
+    $infomsg "[ LOAD ] $manpage"
+    echo ""
+
+    displayboxhandler manpage
+
+    echo ""
+
+}
+
+update () {
+
+    updatecmd () {
+
+        echo ""
+        echo "[ NOTICE ] Checking Required Binary Packages!"
+        echo ""
+
+        binchk_wget=$(which wget)
+        binchk_unzip=$(which unzip)
+        binchk_curl=$(which curl)
+
+        if [ "$binchk_curl" = "/usr/bin/curl" ]; then
+
+            $infomsg "[ VERIFIED ] CURL BINARY PACKAGE"
+
+        else
+
+            $errormsg "[ UN-VERIFIED ] CURL BINARY PACKAGE"
+            echo ""
+
+            apt install -y curl
+
+            echo ""
+
+        fi
+
+        if [ "$binchk_unzip" = "/usr/bin/unzip" ]; then
+
+            $infomsg "[ VERIFIED ] UNZIP BINARY PACKAGE"
+
+        else
+
+            $errormsg "[ UN-VERIFIED ] UNZIP BINARY PACKAGE"
+            echo ""
+
+            apt install -y unzip
+
+            echo ""
+
+        fi
+
+        if [ "$binchk_wget" = "/usr/bin/wget" ]; then
+
+            $infomsg "[ VERIFIED ] WGET BINARY PACKAGE"
+
+        else
+
+            $errormsg "[ UN-VERIFIED ] WGET BINARY PACKAGE"
+            echo ""
+
+            apt install -y wget
+
+            echo ""
+
+        fi
+
+        echo ""
+        echo ""
+
+        # FileUpdate
+        wget -P "/tmp/asadt" https://raw.githubusercontent.com/odf-community/ASADT/main/builder.sh
+        echo "Launching Build Script..."
+        sleep 10
+        clear
+        bash /tmp/asadt/builder.sh
+
+    }
+
+    if [ -f "/tmp/asadt/toolupdate.info" ]; then
+
+        sudo rm "/tmp/asadt/toolupdate.info"
+
+    fi
+
+    $infomsg "[ UPDATE ] Checking For Updates From https://raw.githubusercontent.com/odf-community/ASADT/main/toolupdate.info"
+    $infomsg "[ INFO ] This Will Capture Update Manifest Using 'wget' Command."
+    echo ""
+
+    if [ ! -d "/tmp/asadt" ]; then
+
+        sudo mkdir -p "/tmp/asadt"
+
+    else
+
+        sudo rm -r "/tmp/asadt"
+
+        sudo mkdir -p "/tmp/asadt"
+    
+    fi
+    
+    captureupdate () {
+
+        updatefile="https://raw.githubusercontent.com/odf-community/ASADT/main/toolupdate.info"
+
+        sudo wget -P "/tmp/asadt" "$updatefile"
+
+        if [ ! -f "/tmp/asadt/toolupdate.info" ]; then
+
+            echo ""
+            $errormsg "[ ERROR ] Requested File 'toolupdate.info' Wasn't Found @ /tmp/asadt"
+            $warningmsg "[ WARNING ] Please Try Again!"
+
+            exit
+
+        else
+        
+            . "/tmp/asadt/toolupdate.info"
+
+        fi
+
+        if [ -z "$newversion" ]; then
+
+                echo ""
+                $errormsg "[ ERROR ] Failed To Calculate Version Diffs!"
+                $errormsg "[ ERROR ] The ToolUpdate File is Malformed."
+                $warningmsg "[ WARNING ] Please check update file!"
+
+                exit
+            
+        fi
+
+    }
+
+    calc_diff () {
+
+        if [ "$newversion" = "$currentversion" ]; then
+
+            echo ""
+            $infomsg "[ UPDATE ] No Updates Available!"
+            echo ""
+            $infomsg "[ INFO ] Current Version: $currentversion"
+            $infomsg "[ INFO ] Current Release Version: $currentreleaseversion"
+            $infomsg "[ INFO ] Current Release Codename: $codename"
+            echo ""
+
+        else
+
+            echo ""
+            $warningmsg "[ UPDATE ] Update Available!"
+            $warningmsg "[ UPDATE ] Displaying Update Information..."
+
+            displayboxhandler updateinfo
+
+            echo ""
+            echo -n "Would You Like To Update ASADT $currentversion --> $newversion [y/n] "
+
+            read updateyn
+
+            if [ "$updateyn" = "y" ]; then
+
+                displayboxhandler updatediag
+
+                updatecmd
+
+                exit
+
+            elif [ "$updateyn" = "Y" ]; then
+
+                displayboxhandler updatediag
+
+                updatecmd
+
+                exit
+
+            else
+
+                echo ""
+                echo "Operation Cancelled At Users Request"
+
+                exit
+
+            fi
+
+        fi
+
+    }
+
+    captureupdate
+    calc_diff
+
+}
+
+cnfedit () {
+
+    cnfeditargs="$1"
+
+    cnfedit_title_launch () {
+
+        echo ""
+        $errormsg " ██████╗███╗   ██╗███████╗███████╗██████╗ ██╗████████╗"
+        $errormsg "██╔════╝████╗  ██║██╔════╝██╔════╝██╔══██╗██║╚══██╔══╝"
+        $errormsg "██║     ██╔██╗ ██║█████╗  █████╗  ██║  ██║██║   ██║"
+        $errormsg "██║     ██║╚██╗██║██╔══╝  ██╔══╝  ██║  ██║██║   ██║"
+        $errormsg "╚██████╗██║ ╚████║██║     ███████╗██████╔╝██║   ██║"
+        $errormsg " ╚═════╝╚═╝  ╚═══╝╚═╝     ╚══════╝╚═════╝ ╚═╝   ╚═╝"
+        $errormsg "      Configuration File Editing Made Easier!"
+        echo ""
+
+    }
+
+    launch_editor () {
+
+        editor_nano=$(which nano)
+        editor_vim=$(which vim)
+
+        if [ "$editor_nano" = "/usr/bin/nano" ]; then
+
+            echo ""
+            $infomsg "[ NANO ] NanoEdit: $realfileid"
+            echo ""
+
+            nano --version
+
+            nano --nonewlines "$realfileid"
+
+        elif [ "$editor_vim" = "/usr/bin/vim" ]; then
+
+            $warningmsg "[ WARNING ] The Package 'nano' Seems To Be Missing... Using Default Terminal Text Editor 'vim'"
+            echo ""
+            
+            vim --version
+
+            vim -n "$realfileid"
+
+        else
+
+            $errormsg "[ ERROR ] CnfEdit Requires A Text Editor Binary To Continue"
+            $infomsg "[ INFO ] To Fix This, Please Execute Either Of The Following Commands:"
+            $infomsg "[ INFO ] sudo apt install -y nano"
+            $infomsg "[ INFO ] sudo apt install -y vim"
+
+            exit
+
+        fi
+
+        echo ""
+
+    }
+
+    cnfedit_toolcfg () {
+
+        $infomsg "[ LOAD ] $configbin"
+
+        tree -L 2 "$configbin"
+
+        echo "ex. nmap.ini, sqlmap.ini"
+        echo -n "Select Tool Configuration File: "
+
+        read -r cfgfn
+
+        echo ""
+
+        if [ -f "$configbin/brutetool/$cfgfn" ]; then
+
+            $infomsg "[ FOUND ] $configbin/brutetool/$cfgfn"
+
+            realfileid="$configbin/brutetool/$cfgfn"
+            
+        elif [ -f "$configbin/exemkr/$cfgfn" ]; then
+
+            $infomsg "[ FOUND ] $configbin/exemkr/$cfgfn"
+
+            realfileid="$configbin/exemkr/$cfgfn"
+
+        elif [ -f "$configbin/scantool/$cfgfn" ]; then
+
+            $infomsg "[ FOUND ] $configbin/scantool/$cfgfn"
+
+            realfileid="$configbin/scantool/$cfgfn"
+
+        else
+
+            $errormsg "[ ERROR ] Invalid Search Parameter: $cfgfn"
+            $errormsg "[ ERROR ] Please Try Again"
+
+            exit
+
+        fi
+
+    }
+
+    cnfedit_globalcfg () {
+
+        $infomsg "[ LOAD ] $mainbin/mainprog/ini/global.ini"
+        echo ""
+
+        realfileid="$mainbin/mainprog/ini/global.ini"
+
+    }
+
+    cnfedit_arbitrary () {
+
+        $infomsg "[ LOAD ] Arbitrary Config File: ID: $cfgfn"
+
+        if [ -f "$configbin/brutetool/"$cfgfn".ini" ]; then
+
+            $infomsg "[ FOUND ] $configbin/brutetool/"$cfgfn".ini"
+
+            realfileid="$configbin/brutetool/"$cfgfn".ini"
+            
+        elif [ -f "$configbin/exemkr/"$cfgfn".ini" ]; then
+
+            $infomsg "[ FOUND ] $configbin/exemkr/"$cfgfn".ini"
+
+            realfileid="$configbin/exemkr/"$cfgfn".ini"
+
+        elif [ -f "$configbin/scantool/"$cfgfn".ini" ]; then
+
+            $infomsg "[ FOUND ] $configbin/scantool/"$cfgfn".ini"
+
+            realfileid="$configbin/scantool/"$cfgfn".ini"
+
+        elif [ -f "$mainbin/mainprog/ini/"$cfgfn".ini" ]; then
+
+            $infomsg "[ FOUND ] $mainbin/ini/"$cfgfn".ini"
+
+            realfileid="$mainbin/mainprog/ini/"$cfgfn".ini"
+
+        elif [ -f "$cfgfn" ]; then
+
+            $infomsg "[ FOUND ] $cfgfn"
+
+            realfileid="$cfgfn"
+
+        else
+
+            $errormsg "[ ERROR ] Arbitrary Config File Not Found!"
+            $warningmsg "[ WARNING ] Try Again"
+            echo ""
+            $infomsg "[ INFO ] Arbitrary Arguments: "'"toolname"'" "'"global"'" "'"main"'" "'"modules"'" "'"customfilename"'""
+
+            exit
+
+        fi
+
+    }
+
+    if [ "$cnfeditargs" = "toolcfg" ]; then
+
+        cnfedit_title_launch
+        cnfedit_toolcfg
+        launch_editor
+
+    elif [ "$cnfeditargs" = "globalcfg" ]; then
+
+        cnfedit_title_launch
+        cnfedit_globalcfg
+        launch_editor
+
+    elif [ "$cnfeditargs" = "arbit" ]; then
+
+        cnfedit_title_launch
+        cnfedit_arbitrary
+        launch_editor
+
+    else
+
+        $errormsg "[ ERROR ] Failed To Launch Function 'cnfedit_title_launch'"
+
+        exit
+
+    fi
+
+}

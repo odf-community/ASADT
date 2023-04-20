@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Assistive Search And Discovery Tool
-# Mark 2 | CODENAME ALPHA | Release ID git11601252023
+# Mark 2 | CODENAME ALPHA | Release ID git118
 # Script Maintained & Developed by ODFSEC
 
 # Special Thanks To These GitHub Users:
@@ -9,7 +9,7 @@
 
 # This Script Is Licensed Under GNU-GPL v3
 # Completely Free To Use, Modify & Redistribute!
-# No Redistribution For Financial Or Civil Gain.
+# No Redistribution For Financial or Civil Gain.
 
 # For Safety & Security Reasons, This Script's Functions
 # Will Sometimes Have Comments Explaining What Exactly The Function
@@ -322,7 +322,7 @@ integritychk () {
             echo "[ WARNING ] Integrity Check Failed!"
             echo "[ WARNING ] /usr/bin/asadt Is Missing $whichdonthave Dependencies!"
             echo "[ INFO ] To Fix This Issue, Please Execute The Following Command:"
-            echo "[ INFO ] sudo apt install -y zenity sudo nmap nikto dnsmap dmitry assetfinder wpscan msfpc sqlmap thc-ssl-dos"
+            echo "[ INFO ] sudo $0 --getdep"
             echo ""
             echo "[ DEBUG ] function 'integritychk/apt-src-chk' responded the following data"
             echo "[ DEBUG ] 'whichhave' = $whichhave"
@@ -402,10 +402,13 @@ localvar () {
     cfg_parser "/usr/bin/asadt/lib/mainprog/ini/main.ini"
     cfg_parser "/usr/bin/asadt/lib/mainprog/ini/modules.ini"
     cfg_parser "/usr/bin/asadt/lib/mainprog/ini/global.ini"
+    cfg_parser "/usr/bin/asadt/lib/mainprog/ini/dependencies.ini"
     cfg_section_versioninfo
     cfg_section_maincfg
     cfg_section_globalsettings
     cfg_section_modinfo
+    cfg_section_dependencies_required
+    cfg_section_dependencies_extra
 
     # Get Main Program Function Dictionary
     . "/usr/bin/asadt/lib/mainprog/mainprog.func"
@@ -414,6 +417,7 @@ localvar () {
     . "/usr/bin/asadt/lib/mainprog/modules/brutetool.module"
     . "/usr/bin/asadt/lib/mainprog/modules/exemkr.module"
     . "/usr/bin/asadt/lib/mainprog/modules/scantool.module"
+    . "/usr/bin/asadt/lib/mainprog/modules/sysutil.module"
 
     # Legal Disclaimer
     if [ -z "$legalagree" ]; then
@@ -430,11 +434,10 @@ mainout () {
 
         if [ -z "$output_main" ]; then
 
+            displayboxhandler missingdir
+            
             echo ""
             $warningmsg "[ WARNING ] Output Directory Was Not Defined!"
-            $infomsg "[ INFO ] If You Would Like To Define A Default Output Directory,"
-            $infomsg "[ INFO ] Execute: $0 --cnfedit global"
-            $infomsg "[ INFO ] And Alter 'default_output_location' To Equal A Directory"
             echo ""
             $warningmsg -n "Please Enter A Output Directory To Continue: "
 
@@ -517,6 +520,12 @@ readarg () {
     elif [ "$arg1" = "-hh" ]; then
 
         disphelp_full
+
+        exit
+
+    elif [ "$arg1" = "--getdep" ]; then
+
+        getdep
 
         exit
 
@@ -618,6 +627,12 @@ readarg () {
 
         exit
 
+    elif [[ "$arg1" = "--sysutil" && "$arg2" = "transfersh" ]]; then
+
+        modhandler_sysutil transfersh
+
+        exit
+
     else
 
         if [[ "$arg1" = "--scantool" && -z "$arg2" ]]; then
@@ -635,6 +650,16 @@ readarg () {
             echo ""
             $errormsg "[ ERROR ] Invalid Command Syntax!..."
             $infomsg "[ INFO ] Missing Variable '--brutetool' {tool_name}"
+            $infomsg "[ INFO ] Need Help? Execute $0 -h"
+            echo ""
+
+            exit
+
+        elif [[ "$arg1" = "--systutil" && -z "$arg2" ]]; then
+
+            echo ""
+            $errormsg "[ ERROR ] Invalid Command Syntax!..."
+            $infomsg "[ INFO ] Missing Variable '--sysutil' {tool_name}"
             $infomsg "[ INFO ] Need Help? Execute $0 -h"
             echo ""
 

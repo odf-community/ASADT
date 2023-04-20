@@ -20,6 +20,16 @@ legal_display () {
 
 }
 
+missingdir () {
+
+    zenity --warning \
+    --title="Missing OutPut Directory!" \
+    --window-icon="$mod_icon" \
+    --width="500" \
+    --text="A OutPut Directory Was Not Defined! If You Would Like To Define A Default OutPut Directory, Please Execute '$0 --cnfedit global' Then Alter 'default_output_location' Variable To Equal A Directory Location. You Will Be Re-Promted For A Directory Location After Closing This Message, If You Would Like To Stop, Press Enter To Cancel The Previous Operation(s)."
+    
+}
+
 updatediag () {
 
     zenity --info \
@@ -65,9 +75,13 @@ mod_disablewarn () {
 
         module_version_title="brutetool"
 
-    else
+    elif [ "$module_id" = "exemkr" ]; then
 
         module_version_title="exemkr"
+
+    else
+
+        module_version_title="sysutil"
 
     fi
 
@@ -90,7 +104,7 @@ mod_execute () {
     $errormsg " ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═════╝     ╚═╝"
     $errormsg " Assistive Search And Discovery Tool $currentversion"
     $errormsg " ------------------------------------------------------"
-    $errormsg " Starting '$script_id' {V. $script_version} - Target $targetip $targetport $targethostname $targeturl"
+    $errormsg " Starting '$script_id' {V. $script_version} - Target $targetfile $targetip $targetport $targethostname $targeturl"
     echo ""
     $errormsg " Happy Hacking :p"
 
@@ -102,9 +116,13 @@ mod_execute () {
 
         module_version_title="$mod_brutetool_version"
 
-    else
+    elif [ "$module_id" = "exemkr" ]; then
 
         module_version_title="$mod_exemkr_version"
+
+    else
+
+        module_version_title="$mod_sysutil_version"
 
     fi
 
@@ -622,5 +640,112 @@ zenity_thcssldos () {
     default_output_location=""
 
     mkdir -p "$output_main"
+
+}
+
+transfersh_cliwarn () {
+
+
+    zenity --warning \
+    --title="Warning: 3rd Party Service" \
+    --window-icon="$mod_icon" \
+    --width="500" \
+    --text="'transfer.sh' is a 3rd party service ('https://github.com/dutchcoders/transfer.sh'). This service may have policies or terms we have not listed here. Please make sure what you are uploading is ethical, and allowed in your jurisdiction."
+    
+    zenity --warning \
+    --title="Warning: 3rd Party CLI" \
+    --width="500" \
+    --text="The transfer.sh Python CLI useage is enabled by default within configuration. This CLI Binary is downloaded via 'wget' and applied into the temporary memory area. Please note that we cannot verify the authenticity of all files downloaded at one point. If you would like to use the C-URL builtin version of this program, please edit variable 'transfersh_method' to equal 'curl' within this tools configuration. You will have 10 seconds to cancel this operation before it executes after closing this message"
+    
+    sleep 10
+
+    echo "servicetou=true" >> "$localtemp/.cliwarn_skip"
+
+}
+
+zenity_transfersh_builtins () {
+
+    WIZGUI_transfershcurl=$(
+    zenity --forms \
+    --title="ASADT SysUtil WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter transfer.sh Upload Variables" \
+    --separator="%" \
+    --add-entry="File Location [/dir.d/file.txt]: " )
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targetfile=$(awk -F% '{print $1}' <<<$WIZGUI_transfershcurl)
+
+    if [ -z "$targetfile" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targetfile}!"
+
+        exit
+
+    fi
+}
+
+zenity_transfersh_cli () {
+
+    WIZGUI_transfershcli=$(
+    zenity --forms \
+    --title="ASADT SysUtil WizGUI" \
+    --window-icon="$mod_icon" \
+    --text="Enter transfer.sh Upload Variables" \
+    --separator="%" \
+    --add-entry="File Location [/dir.d/file.txt]: " \
+    --add-entry="File Download Limit [1-25]: " \
+    --add-entry="File Upload Time [1-15 days]: " )
+
+    accepted=$?
+
+    if ((accepted != 0)); then
+
+        error_operationcancelled
+
+        exit
+
+    fi
+
+    targetfile=$(awk -F% '{print $1}' <<<$WIZGUI_transfershcli)
+    shdllimit=$(awk -F% '{print $2}' <<<$WIZGUI_transfershcli)
+    shuploadtime=$(awk -F% '{print $3}' <<<$WIZGUI_transfershcli)
+
+    if [ -z "$targetfile" ]; then
+
+        zenity --error \
+        --text="Non-Fatal Error! Missing Input {targetfile}!"
+
+        exit
+
+    fi
+
+    if [ -z "$shdllimit" ]; then
+
+        zenity --warning \
+        --text="Notice! No {shdllimit} Variable Was Set, Using Default Variable Data {shdllimit = '5'}"
+
+        shdllimit=5
+
+    fi
+
+    if [ -z "$shuploadtime" ]; then
+
+        zenity --warning \
+        --text="Notice! No {shuploadtime} Variable Was Set, Using Default Variable Data {shuploadtime = '1'}"
+
+        shuploadtime=1
+
+    fi
 
 }

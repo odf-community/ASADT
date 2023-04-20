@@ -3,8 +3,8 @@
 <br>
 
 # ASADT | Assistive Search And Discovery Tool
-#### Release: release-git11702252023 \ MarkII_Alpha-v117
-#### Last Update @ 02/25/2023 [ToolUpdate File (ChangeLog)](toolupdate.info)
+#### Release: release-git118 \ MarkII_Alpha-v118
+#### Last Update @ 04/20/2023 [ToolUpdate File (ChangeLog)](toolupdate.info)
 <br>
 
 # Description
@@ -21,6 +21,16 @@ ASADT is built on the newly designed `Bash Prog-FrameWork`, making it extremely 
 <br>
 <br>
 > Notice! This Command Requires The Following APT Packages: `wget`, `unzip` & `curl`
+<br>
+<br>
+
+## Usage
+
+1. Execute `sudo /usr/bin/asadt/asadt.sh --quickarg`
+![](github/imagedata/quickarg.png)
+
+2. Execute `sudo /usr/bin/asadt/asadt.sh` --`module_name` `tool_name`
+
 <br>
 <br>
 

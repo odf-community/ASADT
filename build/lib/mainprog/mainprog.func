@@ -1,56 +1,55 @@
 dispversion () {
 
     echo ""
-    $errormsg "            (                ( "
-    sleep 1
-    $errormsg "    (       )\ )     (       )\ )     *   ) "
-    sleep 1
-    $errormsg "    )\     (()/(     )\     (()/(     )  /( "
-    sleep 1
-    $errormsg " ((((_)(    /(_)) ((((_)(    /(_))   ( )(_))  [A]ssistive "
-    sleep 1
-    $errormsg "  )\ _ )\  (_))    )\ _ )\  (_))_   (_(_())   [S]earch "
-    sleep 1
-    $errormsg "  (_)_\(_) / __|   (_)_\(_)  |   \  |_   _|   [A]nd "
-    sleep 1
-    $errormsg "   / _ \   \__ \    / _ \    | |) |   | |     [D]iscovery "
-    sleep 1
-    $errormsg "  /_/ \_\  |___/   /_/ \_\   |___/    |_|     [T]ool"
-    sleep 3
-    $errormsg " ------------------------------------------ "
-    $errormsg "         Script Developed By ODFSEC "
-    $errormsg "          [$currentversion] [MARK II $codename] "
-    echo ""
-    $errormsg "             https://odfsec.org"
-    $errormsg "         W3 4R3 0DFS3C • iloveu=true "
-    echo ""
+    $errormsg "             (                ( "; read -t .3
+    $errormsg "     (       )\ )     (       )\ )     *   ) "; read -t .3
+    $errormsg "     )\     (()/(     )\     (()/(     )  /( "; read -t .3
+    $errormsg "  ((((_)(    /(_)) ((((_)(    /(_))   ( )(_))  ⌠A⌡ssistive "; read -t .3
+    $errormsg "   )\ _ )\  (_))    )\ _ )\  (_))_   (_(_())   ⌠S⌡earch "; read -t .3
+    $errormsg "   (_)_\(_) / __|   (_)_\(_)  |   \  |_   _|   ⌠A⌡nd "; read -t .3
+    $errormsg "    / _ \   \__ \    / _ \    | |) |   | |     ⌠D⌡iscovery "; read -t .3
+    $errormsg "   /_/ \_\  |___/   /_/ \_\   |___/    |_|     ⌠T⌡ool"; read -t .3
+    $errormsg "  🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹🭹"; read -t .3
+    $errormsg " ⌠PROTECT THE INNOCENT⌡ ⌠PROTECT THE INTERNET⌡"
+    $errormsg "             ⌠PROTECT THE FUTURE⌡"; read -t 2
+    $errormsg "  ╔════════════════════════════════════════╗"; read -t .1
+    $errormsg "  ║       Script Developed By ODFSEC       ║"; read -t .1
+    $errormsg "  ║        [$currentversion] [MARK II $codename]        ║"; read -t .1
+    $errormsg "  ║                                        ║"; read -t .1
+    $errormsg "  ║           https://odfsec.org           ║"; read -t .1
+    $errormsg "  ║       W3 4R3 0DFS3C • iloveu=true      ║"; read -t .1
+    $errormsg "  ╚════════════════════════════════════════╝"; read -t .1
 
 }
 
 mainmenu_full () {
 
     echo ""
-    $errormsg "  █████╗  ███████╗  █████╗  ██████╗  ████████╗"
-    $errormsg " ██╔══██╗ ██╔════╝ ██╔══██╗ ██╔══██╗ ╚══██╔══╝"
-    $errormsg " ███████║ ███████╗ ███████║ ██║  ██║    ██║"
-    $errormsg " ██╔══██║ ╚════██║ ██╔══██║ ██║  ██║    ██║"
-    $errormsg " ██║  ██║ ███████║ ██║  ██║ ██████╔╝    ██║"
-    $errormsg " ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═════╝     ╚═╝"
-    $errormsg " Assistive Search And Discovery Tool $currentversion"
+    $errormsg "  █████╗  ███████╗  █████╗  ██████╗  ████████╗"; read -t .1
+    $errormsg " ██╔══██╗ ██╔════╝ ██╔══██╗ ██╔══██╗ ╚══██╔══╝"; read -t .1
+    $errormsg " ███████║ ███████╗ ███████║ ██║  ██║    ██║"; read -t .1
+    $errormsg " ██╔══██║ ╚════██║ ██╔══██║ ██║  ██║    ██║"; read -t .1
+    $errormsg " ██║  ██║ ███████║ ██║  ██║ ██████╔╝    ██║"; read -t .1
+    $errormsg " ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═════╝     ╚═╝"; read -t .1
+    $errormsg " Assistive Search And Discovery Tool $currentversion"; read -t 1
     echo ""
-    $errormsg " -= QUICKARG MENU =-"
-    echo "" 
-    $errormsg " [1] Use ScanTool Module"
-    $errormsg " [2] Use BruteTool Module"
-    $errormsg " [3] Use ExeMkr Module"
-    $errormsg " [4] Edit Toolkit Configuration"
-    $errormsg " [5] Edit Global Script Settings"
-    $errormsg " [6] Check For Script Updates"
-    $errormsg " [7] View Help Info"
-    $errormsg " [8] View Full HelpDoc/ManPage"
-    $errormsg " [9] View Version Info"
+    $errormsg " ╔════════════⌠ QUICKARG MENU ⌡════════════╗"
+    $errormsg " ║                                         ║"
+    $errormsg " ║ [1] Use ScanTool Module                 ║"
+    $errormsg " ║ [2] Use BruteTool Module                ║"
+    $errormsg " ║ [3] Use ExeMkr Module                   ║"
+    $errormsg " ║ [4] Use SysUtil Module                  ║"
+    $errormsg " ║ [5] Edit Toolkit Configuration          ║"
+    $errormsg " ║ [6] Edit Global Script Settings         ║"
+    $errormsg " ║ [7] Check For Script Updates            ║"
+    $errormsg " ║ [8] Install/Update Script Dependencies  ║"
+    $errormsg " ║ [9] View Help Info                      ║"
+    $errormsg " ║ [10] View Full HelpDoc/ManPage          ║"
+    $errormsg " ║ [11] View Version Info                  ║"
+    $errormsg " ║                                         ║"
+    $errormsg " ╚═════════════════════════════════════════╝"
     echo ""
-    $errormsg -n " Please Select Numerical Option [1-9]: "
+    $errormsg -n " Please Select Numerical Option [1-11]: "
 
     read -r numid_wizmenu
 
@@ -74,27 +73,27 @@ mainmenu_full () {
 
         if [ "$numid_scantoolmenu" = "1" ]; then
 
-            /usr/bin/asadt/asadt.sh --scantool assetfinder
+            $palace --scantool assetfinder
 
         elif [ "$numid_scantoolmenu" = "2" ]; then
 
-            /usr/bin/asadt/asadt.sh --scantool dmitry
+            $palace --scantool dmitry
 
         elif [ "$numid_scantoolmenu" = "3" ]; then
 
-            /usr/bin/asadt/asadt.sh --scantool dnsmap
+            $palace --scantool dnsmap
 
         elif [ "$numid_scantoolmenu" = "4" ]; then
 
-            /usr/bin/asadt/asadt.sh --scantool nikto
+            $palace --scantool nikto
 
         elif [ "$numid_scantoolmenu" = "5" ]; then
 
-            /usr/bin/asadt/asadt.sh --scantool nmap
+            $palace --scantool nmap
 
         elif [ "$numid_scantoolmenu" = "6" ]; then
 
-            /usr/bin/asadt/asadt.sh --scantool wpscan
+            $palace --scantool wpscan
 
         else
 
@@ -121,11 +120,11 @@ mainmenu_full () {
 
         if [ "$numid_brutetoolmenu" = "1" ]; then
 
-            /usr/bin/asadt/asadt.sh --brutetool sqlmap
+            $palace --brutetool sqlmap
 
         elif [ "$numid_brutetoolmenu" = "2" ]; then
 
-            /usr/bin/asadt/asadt.sh --brutetool thcssldos
+            $palace --brutetool thcssldos
 
         else
 
@@ -140,31 +139,61 @@ mainmenu_full () {
 
     elif [ "$numid_wizmenu" = "3" ]; then
 
-        /usr/bin/asadt/asadt.sh --exemkr
+        $palace --exemkr
 
     elif [ "$numid_wizmenu" = "4" ]; then
 
-        /usr/bin/asadt/asadt.sh --cnfedit
+        echo ""
+        $errormsg " -= SYSUTIL MODULE TOOLKIT =-"
+        echo ""
+        $errormsg " [1] Transfer.sh Tool"
+        echo ""
+        $errormsg -n " Please Select Numerical Option [1]: "
+        
+        read -r numid_sysutilmenu
+
+        if [ "$numid_sysutilmenu" = "1" ]; then
+
+            $palace --sysutil transfersh
+
+        else
+
+            echo ""
+            $errormsg " [ ERROR ] Please Enter Numerical Option ID"
+            $errormsg " [ ERROR ] Invalid Input: $numid_sysutilmenu"
+            echo ""
+
+            exit
+
+        fi
 
     elif [ "$numid_wizmenu" = "5" ]; then
 
-        /usr/bin/asadt/asadt.sh --cnfedit global
+        $palace --cnfedit
 
     elif [ "$numid_wizmenu" = "6" ]; then
 
-        /usr/bin/asadt/asadt.sh --update
+        $palace --cnfedit global
 
     elif [ "$numid_wizmenu" = "7" ]; then
 
-        /usr/bin/asadt/asadt.sh -h
+        $palace --update
 
     elif [ "$numid_wizmenu" = "8" ]; then
 
-        /usr/bin/asadt/asadt.sh -hh
+        $palace --getdep
 
     elif [ "$numid_wizmenu" = "9" ]; then
 
-        /usr/bin/asadt/asadt.sh -v
+        $palace -h
+
+    elif [ "$numid_wizmenu" = "10" ]; then
+
+        $palace -hh
+
+    elif [ "$numid_wizmenu" = "11" ]; then
+
+        $palace -v
 
     else
 
@@ -202,6 +231,7 @@ disphelp () {
     $infomsg "'--brutetool' refers to any tool that executes brute-force like processes."
     $infomsg "'--scantool' refers to any tool that executes network analysis like processes."
     $infomsg "'--exemkr' refers to any tool that executes device exploitation like processes."
+    $infomsg "'--sysutil' refers to any tool that executes system like processes & services."
     echo ""
     $infomsg "--exemkr               | Launches the MetaSploit FrameWork Payload Creator device exploitation tool."
     echo ""
@@ -214,6 +244,8 @@ disphelp () {
     $infomsg "--scantool nikto       | Launches the Nikto webserver & CGI analysis tool."
     $infomsg "--scantool nmap        | Launches the NMap system, port, and network analysis tool."
     $infomsg "--scantool wpscan      | Launches the WPScan WordPress vulnrebility analysis tool."
+    echo ""
+    $infomsg "--sysutil transfersh   | Launches the Transfer.sh File Upload Utility."
     echo ""
     $infomsg "Configuration Editor Commands:"
     echo ""
@@ -281,6 +313,34 @@ disphelp_full () {
     displayboxhandler manpage
 
     echo ""
+
+}
+
+getdep () {
+
+    echo ""
+    $warningmsg "[ WARNING ] Are you sure you would like to update/install the following packages?"
+    $infomsg "[ INFO ] Script Dependencies (REQUIRED): $dependencies_required"
+    $infomsg "[ INFO ] Script Dependencies (3RD PARTY/NOT REQUIRED): $dependencies_extra"
+    echo ""
+
+    $warningmsg "Press Enter To Continue, Otherwise Exit The Script!"
+
+    read nulkey
+
+
+    echo ""
+    echo ""
+
+    apt update
+    apt install "$zenity_ia" "$nmap_ia" "$nikto_ia" "$wpscan_ia" "$dnsmap_ia" "$dmitry_ia" "$assetfinder_ia" "$msfpc_ia" "$sqlmap_ia" "$thcssldos_ia" "$bash_ia" "$wget_ia"  
+    apt install "$nano_ia" "$python_ia" "$curl_ia" "$unzip_ia"
+    apt autoremove
+    apt clean
+
+    echo ""
+
+    $successmsg "[ DEPENDENCIES INSTALLED/UPDATED ]"
 
 }
 
@@ -555,6 +615,12 @@ cnfedit () {
 
             realfileid="$configbin/scantool/$cfgfn"
 
+        elif [ -f "$configbin/sysutil/$cfgfn" ]; then
+
+            $infomsg "[ FOUND ] $configbin/sysutil/$cfgfn"
+
+            realfileid="$configbin/sysutil/$cfgfn"
+
         else
 
             $errormsg "[ ERROR ] Invalid Search Parameter: $cfgfn"
@@ -596,6 +662,12 @@ cnfedit () {
             $infomsg "[ FOUND ] $configbin/scantool/"$cfgfn".ini"
 
             realfileid="$configbin/scantool/"$cfgfn".ini"
+
+        elif [ -f "$configbin/sysutil/"$cfgfn".ini" ]; then
+
+            $infomsg "[ FOUND ] $configbin/sysutil/"$cfgfn".ini"
+
+            realfileid="$configbin/sysutil/"$cfgfn".ini"
 
         elif [ -f "$mainbin/mainprog/ini/"$cfgfn".ini" ]; then
 

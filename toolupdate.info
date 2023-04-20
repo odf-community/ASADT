@@ -1,41 +1,52 @@
-newversion='v1.1.7'
+newversion='v1.1.8'
 
 
 
 # Package Version Info:
-# Release ID: {release-git11702252023}
-# Release Version: {v1.1.7}
+# Release ID: {release-git118}
+# Release Version: {v1.1.8}
 # Release Codename: {ALPHA}
 # Release License: {GNU GPL v3}
-# Release Compatability Check: {✓}
+# Release Compatability Check: {✗}
 # Compatability Test Environment-{MS Visual Studio Code v1.74.3_x64}
 # Compatability Tested Using Bash-{5.2.15(1)-release (x86_64-pc-linux-gnu)}
-# Compatability Tested On ParrotOS-{Version 5.1 > Electro Ara}
-# Compatability Tested On KaliOS-{Kali-Rolling 2022.4 > Kernel 6.0.0}
+# Compatability Tested On ParrotOS-{Version 5.2 > Electro Ara}
+# Compatability Tested On KaliOS-{Kali-Rolling 2023.1 > Kernel 6.1.0}
+# Compatability FAILED for ParrotOS-{Version 5.2 > Electro Ara}
+# REASON: SysUtil 'python3' Bash interpretation error.
+# REASON: Missing APT dependency 'wpscan'.
 
 
 
 # GitHub ChangeLog:
-# Updated mini build to v1.1.7
-# Repository Refresh.
+# Updated mini build to v1.1.8
+# Updated 'README.md'
+# Updated Wiki!
+
 
 
 # Build Script ChangeLog:
-# No Changes
+# Updated 'configrewind.func'
 
 
 
 # Main Script ChangeLog:
-# Fixed Temp Directory Errors. Created TmpHandle to fix this.
+# Updated 'readarg' to add new module.
+# Updated 'localvar' to add new module & config.
+# Added '--getdep' argument to check for program dependencies updates/missing installs.
+# Updated 'displayboxhandler' to add new module.
+# Updated 'quickarg' to add new module. Fixed local exec to 'palace'.
+# Added (BROKEN) pkexec startup argument. (breaks GUI promts).
+# 'quickarg' menu got a redesign!
 
 
 # Toolkit ChangeLog:
-# Adding new sysutil module soon!
-# NOTICE!! Parrot OS Does Not Come With WPScan! This will cause apt_src_chk to fail!
-# This was the reason for the message skip and tmphandle update.
+# Added NEW SysUtil Module!
+# Added NEW Transfer.sh Tool!
+# Added NEW Transfer.sh Config!
+
 
 
 # Notices:
-# Our company now has a website!
-# Check it out here -
+# Thank you @dutchcoders for https://transfer.sh integration!
 # https://odfsec.org/

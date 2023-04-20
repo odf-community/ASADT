@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Assistive Search And Discovery Bash Prog-FW Build Script
-# Script Version 5.0.1
+# Script Version 5.0.3
 
 # GNU-GPL-v3
 # Please Read 'LICENSE' to view this program's license!
@@ -422,6 +422,7 @@ buildscript () {
                 current_nikto="$nikto_ini_version"
                 current_nmap="$nmap_ini_version"
                 current_wpscan="$wpscan_ini_version"
+                current_transfersh="$transfersh_ini_version"
 
             }
 
@@ -440,6 +441,7 @@ buildscript () {
                 build_nikto="$nikto_ini_version"
                 build_nmap="$nmap_ini_version"
                 build_wpscan="$wpscan_ini_version"
+                build_transfersh="$transfersh_ini_version"
 
             }
 
@@ -535,6 +537,16 @@ buildscript () {
 
                 fi
 
+                if [ "$current_transfersh" = "$build_transfersh" ]; then
+
+                    transfersh_vid="currentversion"
+
+                else
+
+                    transfer_vid="needsupdate"
+
+                fi
+
             }
 
             update_prev () {
@@ -555,6 +567,7 @@ buildscript () {
                 echo "NIKTO: $nikto_vid"
                 echo "NMAP: $nmap_vid"
                 echo "WPSCAN: $wpscan_vid"
+                echo "TRANSFERSH: $transfersh_vid"
                 echo ""
                 echo ""'"needsupdate"'" Means That The File Will Be Updated"
                 echo ""'"currentversion"'" Means That The File Is Currently Source Version"
@@ -619,6 +632,12 @@ buildscript () {
                     rm $localworkspace/config/scantool/wpscan.ini
 
                     cp $bin/config/scantool/wpscan.ini $localworkspace/config/scantool
+
+                elif [ "$transfersh_vid" = "needsupdate" ]; then
+
+                    rm $localworkspace/config/sysutil/transfersh.ini
+
+                    cp $bin/config/sysutil/transfersh.ini $localworkspace/config/sysutil
 
                 else
 

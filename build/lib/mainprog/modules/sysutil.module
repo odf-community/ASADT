@@ -1,0 +1,150 @@
+dict_mod_sysutil () {
+
+    shtransfer_tool () {
+
+        if [ "$transfersh_enable" = "true" ]; then
+
+            chkupload () {
+
+                if [ -f "$targetfile" ]; then
+
+                    touch "$targetfile"
+
+                elif [ -d "$targetfile" ]; then
+
+                    $errormsg "[ ERROR ] DIRECTORY UPLOAD IS NOT ALLOWED!"
+                    $infomsg "[ INFO ] TRY GENERATING A ZIP ARCHIVE OF THE DIRECTORY AND RE-UPLOAD!"
+
+                    exit
+
+                else
+
+                    touch "$targetfile"
+
+                    "$errormsg [ ERROR ] COULD NOT TOUCH INPUT FILE {targetfile} $targetfile"
+
+                    exit
+
+                fi
+
+            }
+
+            if [ "$transfersh_method" = "cli" ]; then
+
+                displayboxhandler transfersh_cli
+
+                displayboxhandler modexec
+                
+                chkupload
+
+                if [ -f "$localtemp/.cliwarn_skip" ]; then
+
+                    . "$localtemp/.cliwarn_skip"
+
+                else
+
+                    displayboxhandler cliwarn
+
+                    . "$localtemp/.cliwarn_skip"
+
+                fi
+
+                if [ "$servicetou" = "true" ]; then
+
+                    if [ -f "$localtemp/transfersh.py" ]; then
+
+                        $infomsg "[ INFO ] 'transfer.sh' CLI BINARY FOUND!"
+
+                        echo ""
+
+                    else
+
+                        $warningmsg "[ WARNING ] COULD NOT FIND CLI BINARY FILE!"
+                        $warningmsg "[ WARNING ] DOWNLOADING CLI BINARY..."
+
+                        echo ""
+
+                        wget -P "$localtemp" $transfersh_remotecli
+
+                        echo ""
+
+                        $infomsg "[ INFO ] PLEASE WAIT..."
+
+                        sleep 10
+
+                        clear
+
+                        displayboxhandler modexec
+
+                    fi
+
+                    $warningmsg "[ WARNING ] Uploading File $targetfile"
+                    $warningmsg "[ WARNING ] AVAILABLE DOWNLOADS [$shdllimit]"
+                    $warningmsg "[ WARNING ] AVAILABLE FOR [$shuploadtime] DAYS"
+                    echo ""
+
+                    sleep 3
+                    
+                    python "$localtemp/transfersh.py" --max-days "$shuploadtime" --max-downloads "$shdllimit" "$targetfile"
+
+                else
+
+                    echo "CLI TOU NOT ACCEPTED!!!!"
+                    exit
+
+                fi
+
+            elif [ "$transfersh_method" = "curl" ]; then
+
+                displayboxhandler transfersh_curl
+
+                displayboxhandler modexec
+
+                chkupload
+
+                shtransfer_curlcmd () { if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n  transfer <file|directory>\n  ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;}
+            
+                $warningmsg "[ WARNING ] Uploading File $targetfile"
+
+                echo ""
+
+                shtransfer_curlcmd "$targetfile"
+
+                echo ""
+
+                $successmsg "[ SUCCESS ] Target File Was Uploaded!"
+
+            else
+
+                $errormsg "[ ERROR ] VARIABLE {transfersh_method} IS INVALID!"
+
+            fi
+
+        else
+
+            displayboxhandler mod_disablewarn
+
+        fi
+
+    }
+
+}
+
+dict_mod_sysutil
+
+modhandler_sysutil () {
+
+    toolname="$1"
+
+    if [ "$toolname" = "transfersh" ]; then
+
+        cfg_parser "$configbin/sysutil/transfersh.ini"
+        cfg_section_ScriptInfo
+        cfg_section_ScriptEnablers
+        cfg_section_ScriptVariables
+
+        shtransfer_tool
+
+    fi
+    
+}

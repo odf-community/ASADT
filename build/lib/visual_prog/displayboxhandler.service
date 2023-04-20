@@ -15,6 +15,12 @@ displayboxhandler () {
 
     fi
 
+    if [ "$displayid" = "missingdir" ]; then
+
+        missingdir
+
+    fi
+
     if [ "$displayid" = "manpage" ]; then
 
         disphelp_localdoc
@@ -90,6 +96,24 @@ displayboxhandler () {
     if [ "$displayid" = "wpscan" ]; then
 
         zenity_wpscan
+
+    fi
+
+    if [ "$displayid" = "cliwarn" ]; then
+    
+        transfersh_cliwarn
+
+    fi
+    
+    if [ "$displayid" = "transfersh_cli" ]; then
+
+        zenity_transfersh_cli
+
+    fi
+
+    if [ "$displayid" = "transfersh_curl" ]; then
+
+        zenity_transfersh_builtins
 
     fi
 

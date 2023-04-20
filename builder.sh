@@ -406,6 +406,12 @@ buildscript () {
 
                 cp -r "$workspace/config" "$localworkspace/config"
 
+                if [ ! -d "$localworkspace/config/sysutil" ]; then
+
+                    cp -r "$bin/config/sysutil" "$localworkspace/config/sysutil"
+
+                fi
+
             }
 
             versionparse_current () {
@@ -543,7 +549,7 @@ buildscript () {
 
                 else
 
-                    transfer_vid="needsupdate"
+                    transfersh_vid="needsupdate"
 
                 fi
 

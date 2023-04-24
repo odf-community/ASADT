@@ -27,11 +27,10 @@ ASADT is built on the newly designed `Bash Prog-FrameWork`, making it extremely 
 ## Usage
 
 1. Execute `sudo /usr/bin/asadt/asadt.sh --quickarg`
-![](github/imagedata/quickarg.png)
+![](github/imagedata/quickarg.gif)
 
 2. Execute `sudo /usr/bin/asadt/asadt.sh` --`module_name` `tool_name`
 
-<br>
 <br>
 
 ## ASADT WIKI DOCUMENTATION
